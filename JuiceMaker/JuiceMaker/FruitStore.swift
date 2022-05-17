@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FruitStore {
+class FruitStore {
     static let shared = FruitStore()
     var fruitStock: [Fruit : Int]
     private let initialStock = 10
@@ -18,7 +18,18 @@ struct FruitStore {
         
         self.fruitStock = Dictionary(uniqueKeysWithValues: zip(fruit, fruitStocks))
     }
+    
+    func increaseStock(of fruit: Fruit, count: Int) {
+        guard let currentStock = fruitStock[fruit] else {
+            return
+        }
+        fruitStock[fruit] = currentStock + count
+    }
+    
+    func decreasStock(of fruit: Fruit, count: Int) {
+        guard let currentStock = fruitStock[fruit], currentStock > .zero else {
+            return
+        }
+        fruitStock[fruit] = currentStock - count
+    }
 }
-
-
-
