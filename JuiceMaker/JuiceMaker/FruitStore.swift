@@ -8,12 +8,13 @@
 import Foundation
 
 struct FruitStore {
-    private var fruitStock: [Fruit : Int]
+    static let shared = FruitStore()
+    var fruitStock: [Fruit : Int]
     private let initialStock = 10
     
     init() {
         let fruit = Fruit.allCases
-        let fruitStocks = Array(repeating: 10, count: fruit.count)
+        let fruitStocks = Array(repeating: initialStock, count: fruit.count)
         
         self.fruitStock = Dictionary(uniqueKeysWithValues: zip(fruit, fruitStocks))
     }
