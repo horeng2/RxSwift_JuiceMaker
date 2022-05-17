@@ -7,6 +7,6 @@
 
 import Foundation
 
-class OrderJuiceViewModel {
+class OrderViewModel {
     private let fruitStore = FruitStore.shared
 }
