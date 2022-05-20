@@ -60,6 +60,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		48AA463D2833C09300CDAD62 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				48C17470283389C900D5D937 /* OrderViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		48AA463E2833C0B400CDAD62 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				48C1745C28329D8F00D5D937 /* OrderViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		48C1744C28329D8F00D5D937 = {
 			isa = PBXGroup;
 			children = (
@@ -82,14 +98,14 @@
 			isa = PBXGroup;
 			children = (
 				48AA46372833B7EA00CDAD62 /* Model */,
-				48C1745828329D8F00D5D937 /* AppDelegate.swift */,
-				48C1745A28329D8F00D5D937 /* SceneDelegate.swift */,
-				48C1745C28329D8F00D5D937 /* OrderViewController.swift */,
+				48AA463E2833C0B400CDAD62 /* ViewController */,
+				48AA463D2833C09300CDAD62 /* ViewModel */,
 				48C1745E28329D8F00D5D937 /* Main.storyboard */,
 				48C1746128329D9100D5D937 /* Assets.xcassets */,
 				48C1746328329D9100D5D937 /* LaunchScreen.storyboard */,
 				48C1746628329D9100D5D937 /* Info.plist */,
-				48C17470283389C900D5D937 /* OrderViewModel.swift */,
+				48C1745828329D8F00D5D937 /* AppDelegate.swift */,
+				48C1745A28329D8F00D5D937 /* SceneDelegate.swift */,
 			);
 			path = JuiceMaker;
 			sourceTree = "<group>";

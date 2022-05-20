@@ -10,12 +10,11 @@ import Foundation
 class FruitStore {
     static let shared = FruitStore()
     var fruitStock: [Fruit : Int]
-    private let initialStock = 10
+    private(set) let initialStock = 10
     
     init() {
         let fruit = Fruit.allCases
         let fruitStocks = Array(repeating: initialStock, count: fruit.count)
-        
         self.fruitStock = Dictionary(uniqueKeysWithValues: zip(fruit, fruitStocks))
     }
     

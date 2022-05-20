@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxRelay
 
 class OrderViewController: UIViewController {
     @IBOutlet weak var strawberryStockLabel: UILabel!
@@ -21,9 +23,15 @@ class OrderViewController: UIViewController {
     @IBOutlet weak var orderOfPineappleJuice: UIButton!
     @IBOutlet weak var orderOfKiwiJuice: UIButton!
     @IBOutlet weak var orderOfMangoJuice: UIButton!
-  
+    
+    let orderViewModel = OrderViewModel()
+    var disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    @IBAction func orderJuice(_ sender: UIButton) {
     }
 }
 

@@ -124,17 +124,11 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="75"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="딸바쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="byh-Tj-BRU"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VrU-7M-BU3" userLabel="Order of MangKi">
                                                         <rect key="frame" x="329" y="0.0" width="314.5" height="75"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="망키쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hb6-HK-MXg"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yH-eU-fBY" userLabel="Blank">
                                                         <rect key="frame" x="658.5" y="0.0" width="149.5" height="75"/>
@@ -151,41 +145,26 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="딸기쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4do-kv-Sxy"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eC-7y-YRV" userLabel="Order of Banana">
                                                         <rect key="frame" x="164.5" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="바나나쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KTI-jA-L36"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cI6-sl-CpE" userLabel="Order of Pineapple">
                                                         <rect key="frame" x="329" y="0.0" width="150" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="파인애플쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AZA-LS-R7e"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G7-wo-vDY" userLabel="Order of Kiwi">
                                                         <rect key="frame" x="494" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="키위쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WTV-hF-7wy"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itr-8a-ALj" userLabel="Order of Mango">
                                                         <rect key="frame" x="658.5" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="망고쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gml-yZ-dL0"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
