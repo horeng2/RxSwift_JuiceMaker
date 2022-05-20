@@ -98,8 +98,8 @@
 			isa = PBXGroup;
 			children = (
 				48AA46372833B7EA00CDAD62 /* Model */,
-				48AA463E2833C0B400CDAD62 /* ViewController */,
 				48AA463D2833C09300CDAD62 /* ViewModel */,
+				48AA463E2833C0B400CDAD62 /* ViewController */,
 				48C1745E28329D8F00D5D937 /* Main.storyboard */,
 				48C1746128329D9100D5D937 /* Assets.xcassets */,
 				48C1746328329D9100D5D937 /* LaunchScreen.storyboard */,

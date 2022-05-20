@@ -11,7 +11,7 @@
         <!--맛있는 쥬스를 만들어 드려요!-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="JuiceMaker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="OrderViewController" customModule="JuiceMaker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,11 +130,11 @@
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="망키쥬스 주문"/>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yH-eU-fBY" userLabel="Blank">
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yH-eU-fBY" userLabel="Blank">
                                                         <rect key="frame" x="658.5" y="0.0" width="149.5" height="75"/>
                                                         <color key="tintColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="filled" title=""/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title=""/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -185,26 +185,23 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ngs-4O-aBH" secondAttribute="trailing" id="e6V-Jw-GgZ"/>
                             <constraint firstItem="Ngs-4O-aBH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eER-vi-cnF"/>
                         </constraints>
-                        <connections>
-                            <outlet property="strawberryStockLabel" destination="sgS-05-Q1F" id="Qa4-Fy-POy"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="맛있는 쥬스를 만들어 드려요!" id="6JQ-IG-0Fr">
                         <barButtonItem key="rightBarButtonItem" title="재고 수정" id="FEc-td-OAu"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="bananaStockLabel" destination="TS1-O7-bKV" id="rU7-Df-6er"/>
-                        <outlet property="kiwiStockLabel" destination="jhi-Cq-miJ" id="XgQ-x9-CJQ"/>
-                        <outlet property="mangoStockLabel" destination="uIv-WA-Fji" id="uwZ-zU-pov"/>
-                        <outlet property="orderOfBananaJuice" destination="9eC-7y-YRV" id="TEa-ln-UAV"/>
-                        <outlet property="orderOfKiwiJuice" destination="3G7-wo-vDY" id="XCz-ww-gqt"/>
-                        <outlet property="orderOfMangoJuice" destination="itr-8a-ALj" id="H7b-KQ-nmL"/>
-                        <outlet property="orderOfMangoKiwiJuice" destination="VrU-7M-BU3" id="UOZ-B3-czI"/>
-                        <outlet property="orderOfPineappleJuice" destination="cI6-sl-CpE" id="C0q-Ck-hDX"/>
-                        <outlet property="orderOfStrawberryBananaJuice" destination="7Kd-7H-DtS" id="ucP-bx-o7A"/>
-                        <outlet property="orderOfStrawberryJuice" destination="nVN-ew-48A" id="hE7-C0-LbE"/>
-                        <outlet property="pineappleStockLabel" destination="NTt-je-Kf6" id="Zzz-rO-zPT"/>
-                        <outlet property="strawberryStockLabel" destination="sgS-05-Q1F" id="Aef-k8-Fb7"/>
+                        <outlet property="bananaStockLabel" destination="TS1-O7-bKV" id="c5F-UP-VGN"/>
+                        <outlet property="kiwiStockLabel" destination="jhi-Cq-miJ" id="6df-iV-NnO"/>
+                        <outlet property="mangoStockLabel" destination="uIv-WA-Fji" id="mMr-T0-WVj"/>
+                        <outlet property="orderOfBananaJuice" destination="9eC-7y-YRV" id="0wn-gj-pA3"/>
+                        <outlet property="orderOfKiwiJuice" destination="3G7-wo-vDY" id="bk3-4o-Zsq"/>
+                        <outlet property="orderOfMangoJuice" destination="itr-8a-ALj" id="gex-fL-tZY"/>
+                        <outlet property="orderOfMangoKiwiJuice" destination="VrU-7M-BU3" id="JWC-U0-8rH"/>
+                        <outlet property="orderOfPineappleJuice" destination="cI6-sl-CpE" id="Q2X-G8-oYI"/>
+                        <outlet property="orderOfStrawberryBananaJuice" destination="7Kd-7H-DtS" id="e0u-Bp-br7"/>
+                        <outlet property="orderOfStrawberryJuice" destination="nVN-ew-48A" id="4UO-6g-DEi"/>
+                        <outlet property="pineappleStockLabel" destination="NTt-je-Kf6" id="bk8-RE-VgB"/>
+                        <outlet property="strawberryStockLabel" destination="sgS-05-Q1F" id="hqq-4e-d9X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
