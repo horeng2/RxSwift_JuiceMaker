@@ -7,7 +7,7 @@
 
 import UIKit
 import RxSwift
-import RxRelay
+import RxCocoa
 
 class OrderViewController: UIViewController {
     @IBOutlet weak var strawberryStockLabel: UILabel!
@@ -24,14 +24,30 @@ class OrderViewController: UIViewController {
     @IBOutlet weak var orderOfKiwiJuice: UIButton!
     @IBOutlet weak var orderOfMangoJuice: UIButton!
     
-    let orderViewModel = OrderViewModel()
+    var orderViewModel: OrderViewModel?
     var disposeBag = DisposeBag()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bindOrderButtons()
     }
     
-    @IBAction func orderJuice(_ sender: UIButton) {
+    private func bindOrderButtons() {
+        guard let orderViewModel = orderViewModel else {
+            return
+        }
+
+        let input = OrderViewModel.Input(
+            orderStrawberryBananaButtonTap: orderOfStrawberryBananaJuice.rx.tap.asObservable(),
+            orderOfMangoKiwiButtonTap: orderOfMangoKiwiJuice.rx.tap.asObservable(),
+            orderOfStrawberryButtonTap: orderOfStrawberryJuice.rx.tap.asObservable(),
+            orderOfBananaButtonTap: orderOfBananaJuice.rx.tap.asObservable(),
+            orderOfPineappleButtonTap: orderOfPineappleJuice.rx.tap.asObservable(),
+            orderOfKiwiButtonTap: orderOfKiwiJuice.rx.tap.asObservable(),
+            orderOfMangoButtonTap: orderOfMangoJuice.rx.tap.asObservable()
+        )
+        
     }
 }
 

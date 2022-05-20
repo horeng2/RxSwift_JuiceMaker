@@ -10,7 +10,7 @@ import Foundation
 class FruitStore {
     static let shared = FruitStore()
     var fruitStock: [Fruit : Int]
-    private(set) let initialStock = 10
+    private let initialStock = 10
     
     init() {
         let fruit = Fruit.allCases
