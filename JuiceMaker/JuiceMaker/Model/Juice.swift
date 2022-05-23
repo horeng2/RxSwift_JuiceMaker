@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Menu {
+enum Juice {
     var recipe: Dictionary<Fruit, Int> {
         switch self {
         case .strawberryJuice:

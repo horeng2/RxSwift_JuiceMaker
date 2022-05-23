@@ -11,7 +11,7 @@ import RxOptional
 
 class FruitRepository {
     static let shared = FruitRepository()
-    var fruitStock = [Fruit : Int]()
+    private(set) var fruitStock = [Fruit : Int]()
     private let initialStock = 10
     
     init() {
