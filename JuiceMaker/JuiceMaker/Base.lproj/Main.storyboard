@@ -124,11 +124,17 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="75"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="딸바쥬스 주문"/>
+                                                        <connections>
+                                                            <action selector="orderOfStrawberryBananaJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Om8-7H-muk"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VrU-7M-BU3" userLabel="Order of MangKi">
                                                         <rect key="frame" x="329" y="0.0" width="314.5" height="75"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="망키쥬스 주문"/>
+                                                        <connections>
+                                                            <action selector="orderOfMangoKiwiJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aMF-HT-N3U"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yH-eU-fBY" userLabel="Blank">
                                                         <rect key="frame" x="658.5" y="0.0" width="149.5" height="75"/>
@@ -145,26 +151,41 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="딸기쥬스 주문"/>
+                                                        <connections>
+                                                            <action selector="orderOStrawberryJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HDp-5L-jf1"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eC-7y-YRV" userLabel="Order of Banana">
                                                         <rect key="frame" x="164.5" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="바나나쥬스 주문"/>
+                                                        <connections>
+                                                            <action selector="orderOfBananaJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g2e-BD-Lr8"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cI6-sl-CpE" userLabel="Order of Pineapple">
                                                         <rect key="frame" x="329" y="0.0" width="150" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="파인애플쥬스 주문"/>
+                                                        <connections>
+                                                            <action selector="orderOfPineappleJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QwV-Nt-Gcb"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G7-wo-vDY" userLabel="Order of Kiwi">
                                                         <rect key="frame" x="494" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="키위쥬스 주문"/>
+                                                        <connections>
+                                                            <action selector="orderOfKiwiJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="als-1S-cN5"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itr-8a-ALj" userLabel="Order of Mango">
                                                         <rect key="frame" x="658.5" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="망고쥬스 주문"/>
+                                                        <connections>
+                                                            <action selector="orderOfMangoJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5GM-su-qbw"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -193,13 +214,6 @@
                         <outlet property="bananaStockLabel" destination="TS1-O7-bKV" id="c5F-UP-VGN"/>
                         <outlet property="kiwiStockLabel" destination="jhi-Cq-miJ" id="6df-iV-NnO"/>
                         <outlet property="mangoStockLabel" destination="uIv-WA-Fji" id="mMr-T0-WVj"/>
-                        <outlet property="orderOfBananaJuice" destination="9eC-7y-YRV" id="0wn-gj-pA3"/>
-                        <outlet property="orderOfKiwiJuice" destination="3G7-wo-vDY" id="bk3-4o-Zsq"/>
-                        <outlet property="orderOfMangoJuice" destination="itr-8a-ALj" id="gex-fL-tZY"/>
-                        <outlet property="orderOfMangoKiwiJuice" destination="VrU-7M-BU3" id="JWC-U0-8rH"/>
-                        <outlet property="orderOfPineappleJuice" destination="cI6-sl-CpE" id="Q2X-G8-oYI"/>
-                        <outlet property="orderOfStrawberryBananaJuice" destination="7Kd-7H-DtS" id="e0u-Bp-br7"/>
-                        <outlet property="orderOfStrawberryJuice" destination="nVN-ew-48A" id="4UO-6g-DEi"/>
                         <outlet property="pineappleStockLabel" destination="NTt-je-Kf6" id="bk8-RE-VgB"/>
                         <outlet property="strawberryStockLabel" destination="sgS-05-Q1F" id="hqq-4e-d9X"/>
                     </connections>

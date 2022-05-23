@@ -16,52 +16,71 @@ class OrderViewController: UIViewController {
     @IBOutlet weak var kiwiStockLabel: UILabel!
     @IBOutlet weak var mangoStockLabel: UILabel!
     
-    @IBOutlet weak var orderOfStrawberryBananaJuice: UIButton!
-    @IBOutlet weak var orderOfMangoKiwiJuice: UIButton!
-    @IBOutlet weak var orderOfStrawberryJuice: UIButton!
-    @IBOutlet weak var orderOfBananaJuice: UIButton!
-    @IBOutlet weak var orderOfPineappleJuice: UIButton!
-    @IBOutlet weak var orderOfKiwiJuice: UIButton!
-    @IBOutlet weak var orderOfMangoJuice: UIButton!
-    
+    private let orderViewModel = OrderViewModel()
+    private lazy var input = OrderViewModel.Input(orderJuice: PublishSubject<Juice>())
+    private lazy var output = orderViewModel.transform(input: input)
+
     var disposeBag = DisposeBag()
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.binding()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.binding()
     }
     
     private func binding() {
-        let orderViewModel = OrderViewModel()
-
-        let input = OrderViewModel.Input(
-            viewWillAppear: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map{ _ in }
-//            orderStrawberryBananaButtonTap: orderOfStrawberryBananaJuice.rx.tap.asObservable(),
-//            orderOfMangoKiwiButtonTap: orderOfMangoKiwiJuice.rx.tap.asObservable(),
-//            orderOfStrawberryButtonTap: orderOfStrawberryJuice.rx.tap.asObservable(),
-//            orderOfBananaButtonTap: orderOfBananaJuice.rx.tap.asObservable(),
-//            orderOfPineappleButtonTap: orderOfPineappleJuice.rx.tap.asObservable(),
-//            orderOfKiwiButtonTap: orderOfKiwiJuice.rx.tap.asObservable(),
-//            orderOfMangoButtonTap: orderOfMangoJuice.rx.tap.asObservable()
-        )
-        
-        let output = orderViewModel.transform(input: input)
-        
-        output.currentStock
-            .drive(onNext: { stock in
-                self.strawberryStockLabel.text = String(stock[.strawberry] ?? 10)
-                self.bananaStockLabel.text = String(stock[.banana] ?? 10)
-                self.pineappleStockLabel.text = String(stock[.pineapple] ?? 10)
-                self.kiwiStockLabel.text = String(stock[.kiwi] ?? 10)
-                self.mangoStockLabel.text = String(stock[.mango] ?? 10)
-            })
-            .disposed(by: self.disposeBag)
-            
-        
+        output.orderSuccess.subscribe(onNext: { _ in
+            Fruit.allCases.forEach { fruit in
+                self.updateStockLabel(of: fruit)
+            }
+        }).disposed(by: disposeBag)
     }
+    
+    private func updateStockLabel(of fruit: Fruit) {
+        var label: UILabel?
+        switch fruit {
+        case .strawberry:
+            label = self.strawberryStockLabel
+        case .banana:
+            label = self.bananaStockLabel
+        case .pineapple:
+            label = self.pineappleStockLabel
+        case .kiwi:
+            label = self.kiwiStockLabel
+        case .mango:
+            label = self.mangoStockLabel
+        }
+        orderViewModel.fruitStockObservable(of: fruit)
+            .map{ String($0) }
+            .subscribe(onNext: { stock in
+                label?.text = stock
+            }).disposed(by: disposeBag)
+    }
+    
+    @IBAction func orderOfStrawberryBananaJuice(_ sender: Any) {
+        self.input.orderJuice.onNext(.strawberryBananaJuice)
+    }
+    @IBAction func orderOfMangoKiwiJuice(_ sender: Any) {
+        self.input.orderJuice.onNext(.mangoKiwiJuice)
+    }
+    @IBAction func orderOStrawberryJuice(_ sender: Any) {
+        self.input.orderJuice.onNext(.strawberryJuice)
+    }
+    @IBAction func orderOfBananaJuice(_ sender: Any) {
+        self.input.orderJuice.onNext(.bananaJuice)
+    }
+    @IBAction func orderOfPineappleJuice(_ sender: Any) {
+        self.input.orderJuice.onNext(.pineappleJuice)
+    }
+    @IBAction func orderOfKiwiJuice(_ sender: Any) {
+        self.input.orderJuice.onNext(.kiwiJuice)
+    }
+    @IBAction func orderOfMangoJuice(_ sender: Any) {
+        self.input.orderJuice.onNext(.mangoJuice)
+    }
+    
 }
 

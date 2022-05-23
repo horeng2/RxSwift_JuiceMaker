@@ -7,56 +7,52 @@
 
 import Foundation
 import RxSwift
-import RxRelay
-import RxCocoa
 
-class OrderViewModel: ViewModelType {
-    let fruitStock = BehaviorRelay<[Fruit: Int]>(value: FruitStore.shared.fruitStock)
-    
-    let disposeBag = DisposeBag()
+class OrderViewModel {
+    private let juiceMaker = JuiceMaker()
+    private let disposeBag = DisposeBag()
 
     struct Input {
-        let viewWillAppear: Observable<Void>
-//        let orderStrawberryBananaButtonTap: Observable<Void>
-//        let orderOfMangoKiwiButtonTap: Observable<Void>
-//        let orderOfStrawberryButtonTap: Observable<Void>
-//        let orderOfBananaButtonTap: Observable<Void>
-//        let orderOfPineappleButtonTap: Observable<Void>
-//        let orderOfKiwiButtonTap: Observable<Void>
-//        let orderOfMangoButtonTap: Observable<Void>
+        let orderJuice: PublishSubject<Juice>
     }
     
     struct Output {
-        var currentStock: Driver<[Fruit: Int]>
-//        var bananaStock: Driver<Int>
-//        var pineappleStock: Driver<Int>
-//        var kiwiStock: Driver<Int>
-//        var mangoStock: Driver<Int>
+        let orderSuccess: BehaviorSubject<Bool>
     }
     
     func transform(input: Input) -> Output {
-        let currentStock = fruitStock.asDriver()
+        let orderSuccess = BehaviorSubject<Bool>(value: true)
         
-//        let bananaStock = fruitStock
-//            .map{ $0.filter{ $0.key == .banana } }
-//            .asDriver(onErrorJustReturn: [.banana: 0])
-//        let pineappleStock = fruitStock
-//            .map{ $0.filter{ $0.key == .pineapple } }
-//            .asDriver(onErrorJustReturn: [.pineapple: 0])
-//        let kiwiStock = fruitStock
-//            .map{ $0.filter{ $0.key == .kiwi } }
-//            .asDriver(onErrorJustReturn: [.kiwi: 0])
-//        let mangoStock = fruitStock
-//            .map{ $0.filter{ $0.key == .mango } }
-//            .asDriver(onErrorJustReturn: [.mango: 0])
-            
-            return Output(currentStock: currentStock)
+        input.orderJuice
+            .map{ juice in
+            self.juiceMaker.makeJuice(juice)
+            }.subscribe(onNext: { juiceObservable in
+                juiceObservable
+                    .subscribe(onNext: { juice in
+                        if juice == nil {
+                            orderSuccess.onNext(false)
+                        }
+                    }).disposed(by: self.disposeBag)
+            }).disposed(by: disposeBag)
+ 
+        return Output(orderSuccess: orderSuccess)
+    }
+    
+    func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
+        return juiceMaker.fruitStockObservable(of: fruit)
     }
 }
 
-protocol ViewModelType: AnyObject {
-    associatedtype Input
-    associatedtype Output
+enum OrderResult {
+    var message: String {
+        switch self {
+        case .orderSuccess:
+            return "주스 주문 완료"
+        case .orderFailure:
+            return "주문 실패"
+        }
+    }
     
-    func transform(input: Input) -> Output
+    case orderSuccess
+    case orderFailure
 }
