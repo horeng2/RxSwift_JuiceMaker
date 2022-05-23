@@ -7,6 +7,7 @@ target 'JuiceMaker' do
 pod 'RxSwift'
 pod 'RxCocoa'
 pod 'RxRelay'
+pod 'RxOptional'
   # Pods for JuiceMaker
 
 end
