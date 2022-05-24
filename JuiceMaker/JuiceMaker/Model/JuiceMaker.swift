@@ -28,7 +28,7 @@ struct JuiceMaker {
 
         let juiceObservable = canMake
             .scan(into: []) { $0.append($1) }
-            .map{ $0.contains(true) ? true : false }
+            .map{ $0.contains(false) ? false : true }
             .map{ $0 == true ? juice : nil }
             .do(onNext: { _ in
                 self.takeFruitStock(for: juice)

@@ -82,5 +82,11 @@ class OrderViewController: UIViewController {
         self.input.orderJuice.onNext(.mangoJuice)
     }
     
+    @IBAction func moveToEditViewController(_ sender: Any) {
+        guard let vc = self.storyboard?.instantiateViewController(identifier: "EditViewController") else {
+            return
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 

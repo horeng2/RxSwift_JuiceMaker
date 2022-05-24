@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		48408EA9283B691000B7BF5A /* JuiceMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48408EA8283B691000B7BF5A /* JuiceMaker.swift */; };
+		48408EAB283BAD8200B7BF5A /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48408EAA283BAD8200B7BF5A /* EditViewController.swift */; };
 		48AA46392833B81200CDAD62 /* Juice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48AA46382833B81200CDAD62 /* Juice.swift */; };
 		48C1745928329D8F00D5D937 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C1745828329D8F00D5D937 /* AppDelegate.swift */; };
 		48C1745B28329D8F00D5D937 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C1745A28329D8F00D5D937 /* SceneDelegate.swift */; };
@@ -25,6 +26,7 @@
 		332291326EED0A76D764D228 /* Pods_JuiceMaker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JuiceMaker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D538AE0A054EEFD73F5DB60 /* Pods-JuiceMaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JuiceMaker.debug.xcconfig"; path = "Target Support Files/Pods-JuiceMaker/Pods-JuiceMaker.debug.xcconfig"; sourceTree = "<group>"; };
 		48408EA8283B691000B7BF5A /* JuiceMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuiceMaker.swift; sourceTree = "<group>"; };
+		48408EAA283BAD8200B7BF5A /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		48AA46382833B81200CDAD62 /* Juice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Juice.swift; sourceTree = "<group>"; };
 		48C1745528329D8F00D5D937 /* JuiceMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JuiceMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48C1745828329D8F00D5D937 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				48C1745C28329D8F00D5D937 /* OrderViewController.swift */,
+				48408EAA283BAD8200B7BF5A /* EditViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 				48C1746D2832A8A500D5D937 /* FruitRepository.swift in Sources */,
 				48C17471283389C900D5D937 /* OrderViewModel.swift in Sources */,
 				48C1745B28329D8F00D5D937 /* SceneDelegate.swift in Sources */,
+				48408EAB283BAD8200B7BF5A /* EditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
