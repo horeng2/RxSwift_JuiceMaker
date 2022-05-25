@@ -30,7 +30,10 @@ struct JuiceMaker {
             .scan(into: []) { $0.append($1) }
             .map{ $0.contains(false) ? false : true }
             .map{ $0 == true ? juice : nil }
-            .do(onNext: { _ in
+            .do(onNext: { juice in
+                guard let juice = juice else {
+                    return
+                }
                 self.takeFruitStock(for: juice)
             })
         

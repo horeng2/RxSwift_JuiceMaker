@@ -51,17 +51,3 @@ class OrderViewModel {
         return juiceMaker.fruitStockObservable(of: fruit)
     }
 }
-
-enum OrderResult {
-    var message: String {
-        switch self {
-        case .orderSuccess:
-            return "주스 주문 완료"
-        case .orderFailure:
-            return "주문 실패! 재고가 부족해욥"
-        }
-    }
-    
-    case orderSuccess
-    case orderFailure
-}

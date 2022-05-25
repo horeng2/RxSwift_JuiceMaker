@@ -22,22 +22,22 @@ class OrderViewController: UIViewController {
 
     var disposeBag = DisposeBag()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.binding()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.binding()
     }
     
     private func binding() {
         output.orderSuccess
             .subscribe(onNext: { _ in
-            Fruit.allCases.forEach { fruit in
-                self.updateStockLabel(of: fruit)
-            }
-        }).disposed(by: disposeBag)
+                Fruit.allCases.forEach { fruit in
+                    self.updateStockLabel(of: fruit)
+                }
+            }).disposed(by: disposeBag)
+        output.resultMessage
+            .subscribe(onNext: { message in
+                self.showAlert(title: "주문 결과", message: message)
+            }).disposed(by: disposeBag)
     }
     
     private func updateStockLabel(of fruit: Fruit) {
@@ -83,6 +83,13 @@ class OrderViewController: UIViewController {
         self.input.orderJuice.onNext(.mangoJuice)
     }
     
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alertController, animated: true)
+    }
+    
+    
     @IBAction func moveToEditViewController(_ sender: Any) {
         guard let vc = self.storyboard?.instantiateViewController(identifier: "EditViewController") else {
             return
@@ -90,4 +97,6 @@ class OrderViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+
 
