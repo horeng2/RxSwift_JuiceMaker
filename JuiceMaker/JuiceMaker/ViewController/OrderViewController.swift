@@ -32,7 +32,8 @@ class OrderViewController: UIViewController {
     }
     
     private func binding() {
-        output.orderSuccess.subscribe(onNext: { _ in
+        output.orderSuccess
+            .subscribe(onNext: { _ in
             Fruit.allCases.forEach { fruit in
                 self.updateStockLabel(of: fruit)
             }

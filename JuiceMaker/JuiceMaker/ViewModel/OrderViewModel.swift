@@ -18,10 +18,12 @@ class OrderViewModel {
     
     struct Output {
         let orderSuccess: BehaviorSubject<Bool>
+        let resultMessage: PublishSubject<String>
     }
     
     func transform(input: Input) -> Output {
         let orderSuccess = BehaviorSubject<Bool>(value: true)
+        let resultMessage = PublishSubject<String>()
         
         input.orderJuice
             .map{ juice in
@@ -31,11 +33,18 @@ class OrderViewModel {
                     .subscribe(onNext: { juice in
                         if juice == nil {
                             orderSuccess.onNext(false)
+                            resultMessage.onNext(OrderResult.orderFailure.message)
+                        } else {
+                            orderSuccess.onNext(true)
+                            resultMessage.onNext(OrderResult.orderSuccess.message)
                         }
                     }).disposed(by: self.disposeBag)
             }).disposed(by: disposeBag)
- 
-        return Output(orderSuccess: orderSuccess)
+        
+        return Output(
+            orderSuccess: orderSuccess,
+            resultMessage: resultMessage
+        )
     }
     
     func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
@@ -49,7 +58,7 @@ enum OrderResult {
         case .orderSuccess:
             return "주스 주문 완료"
         case .orderFailure:
-            return "주문 실패"
+            return "주문 실패! 재고가 부족해욥"
         }
     }
     
