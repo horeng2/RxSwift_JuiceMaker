@@ -17,12 +17,12 @@ class OrderViewModel {
     }
     
     struct Output {
-        let orderSuccess: BehaviorSubject<Bool>
+        let orderSuccess: PublishSubject<Bool>
         let resultMessage: PublishSubject<String>
     }
     
     func transform(input: Input) -> Output {
-        let orderSuccess = BehaviorSubject<Bool>(value: true)
+        let orderSuccess = PublishSubject<Bool>()
         let resultMessage = PublishSubject<String>()
         
         input.orderJuice

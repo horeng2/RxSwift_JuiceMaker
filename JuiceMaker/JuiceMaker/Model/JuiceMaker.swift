@@ -40,9 +40,19 @@ struct JuiceMaker {
         return juiceObservable
     }
     
-    func takeFruitStock(for juice: Juice) {
+    private func takeFruitStock(for juice: Juice) {
         juice.recipe.forEach { (fruit, count) in
             fruitRepository.decreasStock(of: fruit, count: count)
         }
     }
+    
+    func modifyFruitStock(_ changeOperator: StockChangeOperator, for fruit: Fruit) -> PublishSubject<Bool> {
+        switch changeOperator {
+        case .up:
+            return fruitRepository.increaseStock(of: fruit, count: 1)
+        case .down:
+            return fruitRepository.decreasStock(of: fruit, count: 1)
+        }
+    }
+    
 }

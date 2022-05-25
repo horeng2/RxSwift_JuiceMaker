@@ -360,6 +360,13 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="재고 추가" id="XAk-ek-smb"/>
+                    <connections>
+                        <outlet property="bananaStockLabel" destination="HmZ-H5-RIT" id="fu5-cr-dE3"/>
+                        <outlet property="kiwiStockLabel" destination="TpD-hU-KpE" id="dqb-zh-Lt1"/>
+                        <outlet property="mangoStockLabel" destination="6PN-jJ-XLl" id="yiY-PZ-ebc"/>
+                        <outlet property="pineappleStockLabel" destination="gLz-9k-AqY" id="adq-ZT-vdW"/>
+                        <outlet property="strawberryStockLabel" destination="a0J-c5-l2x" id="06D-ik-I5G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jn7-N9-jGM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

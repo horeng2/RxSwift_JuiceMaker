@@ -6,13 +6,54 @@
 //
 
 import UIKit
+import RxSwift
 
 class EditViewController: UIViewController {
+    @IBOutlet weak var strawberryStockLabel: UILabel!
+    @IBOutlet weak var bananaStockLabel: UILabel!
+    @IBOutlet weak var pineappleStockLabel: UILabel!
+    @IBOutlet weak var kiwiStockLabel: UILabel!
+    @IBOutlet weak var mangoStockLabel: UILabel!
+    
+    private let editViewModel = EditViewModel()
+    private lazy var input = EditViewModel.Input(stockChange: PublishSubject<(Fruit, StockChangeOperator)>())
+    private lazy var output = editViewModel.transform(input: input)
 
+    private let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        binding()
+    }
+    
+    private func binding() {
+        output.modifyStockSuccess
+            .subscribe(onNext: { _ in
+                Fruit.allCases.forEach { fruit in
+                    self.updateStockLabel(of: fruit)
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    private func updateStockLabel(of fruit: Fruit) {
+        var label: UILabel?
+        switch fruit {
+        case .strawberry:
+            label = self.strawberryStockLabel
+        case .banana:
+            label = self.bananaStockLabel
+        case .pineapple:
+            label = self.pineappleStockLabel
+        case .kiwi:
+            label = self.kiwiStockLabel
+        case .mango:
+            label = self.mangoStockLabel
+        }
+        editViewModel.fruitStockObservable(of: fruit)
+            .map{ String($0) }
+            .subscribe(onNext: { stock in
+                label?.text = stock
+            }).disposed(by: disposeBag)
     }
     
 }
