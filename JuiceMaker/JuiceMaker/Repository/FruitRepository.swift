@@ -25,26 +25,21 @@ class FruitRepository {
                 .filterNil()
     }
     
-    func increaseStock(of fruit: Fruit, count: Int) -> PublishSubject<Bool> {
-        let increaseSuccess = PublishSubject<Bool>()
-        guard let currentStock = fruitStock[fruit] else {
-            increaseSuccess.onNext(false)
-            return increaseSuccess
+    func modifyStock(of fruit: Fruit, to newQuantity: Int) -> PublishSubject<Bool> {
+        let modifySuccess = PublishSubject<Bool>()
+        guard let currentStock = fruitStock[fruit], currentStock > .zero else {
+            modifySuccess.onNext(false)
+            return modifySuccess
         }
-        self.fruitStock.updateValue(currentStock + count, forKey: fruit)
-        increaseSuccess.onNext(true)
-        return increaseSuccess
+        self.fruitStock.updateValue(newQuantity, forKey: fruit)
+        modifySuccess.onNext(true)
+        return modifySuccess
     }
     
-    @discardableResult
-    func decreasStock(of fruit: Fruit, count: Int) -> PublishSubject<Bool> {
-        let decreaseSuccess = PublishSubject<Bool>()
+    func decreaseStock(of fruit: Fruit, count: Int) {
         guard let currentStock = fruitStock[fruit], currentStock > .zero else {
-            decreaseSuccess.onNext(false)
-            return decreaseSuccess
+            return
         }
         self.fruitStock.updateValue(currentStock - count, forKey: fruit)
-        decreaseSuccess.onNext(true)
-        return decreaseSuccess
     }
 }

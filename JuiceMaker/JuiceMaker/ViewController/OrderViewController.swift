@@ -22,9 +22,13 @@ class OrderViewController: UIViewController {
 
     var disposeBag = DisposeBag()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.binding()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.binding()
     }
     
     private func binding() {

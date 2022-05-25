@@ -15,8 +15,14 @@ class EditViewController: UIViewController {
     @IBOutlet weak var kiwiStockLabel: UILabel!
     @IBOutlet weak var mangoStockLabel: UILabel!
     
+    @IBOutlet weak var strawberryStepper: UIStepper!
+    @IBOutlet weak var bananaStepper: UIStepper!
+    @IBOutlet weak var pineappleStepper: UIStepper!
+    @IBOutlet weak var kiwiStepper: UIStepper!
+    @IBOutlet weak var mangoStepper: UIStepper!
+    
     private let editViewModel = EditViewModel()
-    private lazy var input = EditViewModel.Input(stockChange: PublishSubject<(Fruit, StockChangeOperator)>())
+    private lazy var input = EditViewModel.Input(stockChange: PublishSubject<(Fruit, Int)>())
     private lazy var output = editViewModel.transform(input: input)
 
     private let disposeBag = DisposeBag()
@@ -55,5 +61,24 @@ class EditViewController: UIViewController {
                 label?.text = stock
             }).disposed(by: disposeBag)
     }
+
+    @IBAction func tapStrawberryStepper(_ sender: Any) {
+        self.input.stockChange.onNext((.strawberry, Int(strawberryStepper.value)))
+    }
     
+    @IBAction func tapBananaStepper(_ sender: Any) {
+        self.input.stockChange.onNext((.banana, Int(bananaStepper.value)))
+    }
+    
+    @IBAction func tapPineappleStepper(_ sender: Any) {
+        self.input.stockChange.onNext((.pineapple, Int(pineappleStepper.value)))
+    }
+    
+    @IBAction func tapKiwiStepper(_ sender: Any) {
+        self.input.stockChange.onNext((.kiwi, Int(kiwiStepper.value)))
+    }
+    
+    @IBAction func tapMangoStepper(_ sender: Any) {
+        self.input.stockChange.onNext((.mango, Int(mangoStepper.value)))
+    }
 }
