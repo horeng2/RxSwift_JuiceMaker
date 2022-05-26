@@ -59,26 +59,27 @@ class EditViewController: UIViewController {
             .map{ String($0) }
             .subscribe(onNext: { stock in
                 label?.text = stock
+                print(stock)
             }).disposed(by: disposeBag)
     }
 
     @IBAction func tapStrawberryStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.strawberry, Int(strawberryStepper.value)))
+        self.input.stockChange.onNext((.strawberry, Int(strawberryStepper.stepValue)))
     }
     
     @IBAction func tapBananaStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.banana, Int(bananaStepper.value)))
+        self.input.stockChange.onNext((.banana, Int(bananaStepper.stepValue)))
     }
     
     @IBAction func tapPineappleStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.pineapple, Int(pineappleStepper.value)))
+        self.input.stockChange.onNext((.pineapple, Int(pineappleStepper.stepValue)))
     }
     
     @IBAction func tapKiwiStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.kiwi, Int(kiwiStepper.value)))
+        self.input.stockChange.onNext((.kiwi, Int(kiwiStepper.stepValue)))
     }
     
     @IBAction func tapMangoStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.mango, Int(mangoStepper.value)))
+        self.input.stockChange.onNext((.mango, Int(mangoStepper.stepValue)))
     }
 }

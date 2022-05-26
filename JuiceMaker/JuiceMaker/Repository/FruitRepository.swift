@@ -26,7 +26,7 @@ class FruitRepository {
     }
     
     func modifyStock(of fruit: Fruit, to newQuantity: Int) -> Observable<Bool> {
-        guard let currentStock = fruitStock[fruit], currentStock > .zero else {
+        guard fruitStock[fruit] != nil else {
             return Observable.just(false)
         }
         self.fruitStock.updateValue(newQuantity, forKey: fruit)

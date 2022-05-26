@@ -22,10 +22,19 @@ class EditViewModel {
     
     func transform(input: Input) -> Output {
         let modifyStockSuccess = BehaviorSubject<Bool>(value: true)
+        let newFruitStock = PublishSubject<(Fruit, Int)>()
         
         input.stockChange
-            .map{ changing in
-                self.juiceMaker.modifyFruitStock(for: changing.0, newQuantity: changing.1)
+            .subscribe(onNext: { (fruit, quantity) in
+                self.juiceMaker.fruitStockObservable(of: fruit)
+                    .subscribe(onNext: { currentStock in
+                        newFruitStock.onNext((fruit, quantity + currentStock))
+                    }).disposed(by: self.disposeBag)
+            }).disposed(by: disposeBag)
+        
+        newFruitStock
+            .map{ (fruit, quantity) in
+                self.juiceMaker.modifyFruitStock(for: fruit, newQuantity: quantity)
             }.subscribe(onNext: { modifyResult in
                 modifyResult
                     .subscribe(onNext: { result in
@@ -36,6 +45,8 @@ class EditViewModel {
                         }
                     }).disposed(by: self.disposeBag)
             }).disposed(by: disposeBag)
+        
+        
         
         return Output(modifyStockSuccess: modifyStockSuccess)
     }
