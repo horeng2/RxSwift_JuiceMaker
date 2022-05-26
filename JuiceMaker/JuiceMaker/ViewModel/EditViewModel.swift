@@ -27,9 +27,8 @@ class EditViewModel {
         
         input.stockChange
             .subscribe(onNext: { (fruit, quantity) in
-                if let failureMessage = self.modifyFailureMessage(quantity) {
-                    alartMessage.onNext(failureMessage)
-                    return
+                if let message = self.limitStockAlertMessage(quantity) {
+                    alartMessage.onNext(message)
                 }
                 self.juiceMaker.modifyFruitStock(for: fruit, newQuantity: quantity)
                     .subscribe(onNext: { result in
@@ -48,15 +47,15 @@ class EditViewModel {
         return juiceMaker.fruitStockObservable(of: fruit)
     }
     
-    func modifyFailureMessage(_ quantity: Int) -> String? {
-        var modifyAlert: String? = nil
+    private func limitStockAlertMessage(_ quantity: Int) -> String? {
+        var limitAlert: String? = nil
         
-        if quantity > 100 {
-            modifyAlert = ModifyStockAlert.maximumStock.message
-        } else if quantity < 0 {
-            modifyAlert = ModifyStockAlert.minimumStock.message
+        if quantity == FruitRepository.maximumStock {
+            limitAlert = ModifyStockAlert.maximumStock.message
+        } else if quantity == .zero {
+            limitAlert = ModifyStockAlert.minimumStock.message
         }
         
-        return modifyAlert
+        return limitAlert
     }
 }

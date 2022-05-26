@@ -11,9 +11,9 @@ enum ModifyStockAlert {
     var message: String {
         switch self {
         case .minimumStock:
-            return "더이상 줄일 수 없습니다👾"
+            return "재고가 바닥났어요📦"
         case .maximumStock:
-            return "재고가 최대값입니다. 배불러요🐷"
+            return "재고가 꽉찼습니다. 배불러요🐷"
         }
     }
     

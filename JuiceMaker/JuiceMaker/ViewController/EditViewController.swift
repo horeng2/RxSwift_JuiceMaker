@@ -69,6 +69,8 @@ class EditViewController: UIViewController {
             label = self.mangoStockLabel
             stepper = self.mangoStepper
         }
+        stepper?.minimumValue = .zero
+        stepper?.maximumValue = Double(FruitRepository.maximumStock)
         
         editViewModel.fruitStockObservable(of: fruit)
             .subscribe(onNext: { stock in
