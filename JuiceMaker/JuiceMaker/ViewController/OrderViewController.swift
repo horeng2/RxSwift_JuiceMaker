@@ -20,7 +20,7 @@ class OrderViewController: UIViewController {
     private lazy var input = OrderViewModel.Input(orderJuice: PublishSubject<Juice>())
     private lazy var output = orderViewModel.transform(input: input)
 
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
