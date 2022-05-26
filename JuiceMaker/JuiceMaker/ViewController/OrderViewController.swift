@@ -32,13 +32,13 @@ class OrderViewController: UIViewController {
     }
     
     private func binding() {
-        output.orderSuccess
+        self.output.orderSuccess
             .subscribe(onNext: { _ in
                 Fruit.allCases.forEach { fruit in
                     self.updateStockLabel(of: fruit)
                 }
             }).disposed(by: disposeBag)
-        output.resultMessage
+        self.output.resultMessage
             .subscribe(onNext: { message in
                 self.showAlert(title: "주문 결과", message: message)
             }).disposed(by: disposeBag)

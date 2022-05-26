@@ -33,7 +33,7 @@ class EditViewController: UIViewController {
     }
     
     private func binding() {
-        output.modifyStockSuccess
+        self.output.modifyStockSuccess
             .subscribe(onNext: { _ in
                 Fruit.allCases.forEach { fruit in
                     self.updateStockLabel(of: fruit)

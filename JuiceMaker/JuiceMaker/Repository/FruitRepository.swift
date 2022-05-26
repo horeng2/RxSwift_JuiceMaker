@@ -25,15 +25,12 @@ class FruitRepository {
                 .filterNil()
     }
     
-    func modifyStock(of fruit: Fruit, to newQuantity: Int) -> PublishSubject<Bool> {
-        let modifySuccess = PublishSubject<Bool>()
+    func modifyStock(of fruit: Fruit, to newQuantity: Int) -> Observable<Bool> {
         guard let currentStock = fruitStock[fruit], currentStock > .zero else {
-            modifySuccess.onNext(false)
-            return modifySuccess
+            return Observable.just(false)
         }
         self.fruitStock.updateValue(newQuantity, forKey: fruit)
-        modifySuccess.onNext(true)
-        return modifySuccess
+        return Observable.just(true)
     }
     
     func decreaseStock(of fruit: Fruit, count: Int) {
