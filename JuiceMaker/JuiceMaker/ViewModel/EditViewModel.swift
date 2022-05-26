@@ -18,18 +18,16 @@ class EditViewModel {
     
     struct Output {
         let modifyStockSuccess: BehaviorSubject<Bool>
-        let alartMessage: PublishSubject<String?>
+        let alertMessage: PublishSubject<String?>
     }
     
     func transform(input: Input) -> Output {
         let modifyStockSuccess = BehaviorSubject<Bool>(value: true)
-        let alartMessage = PublishSubject<String?>()
+        let alertMessage = PublishSubject<String?>()
         
         input.stockChange
             .subscribe(onNext: { (fruit, quantity) in
-                if let message = self.limitStockAlertMessage(quantity) {
-                    alartMessage.onNext(message)
-                }
+                alertMessage.onNext(self.limitStockAlertMessage(quantity))
                 self.juiceMaker.modifyFruitStock(for: fruit, newQuantity: quantity)
                     .subscribe(onNext: { result in
                         if result == true {
@@ -40,7 +38,7 @@ class EditViewModel {
                     }).disposed(by: self.disposeBag)
             }).disposed(by: disposeBag)
 
-        return Output(modifyStockSuccess: modifyStockSuccess, alartMessage: alartMessage)
+        return Output(modifyStockSuccess: modifyStockSuccess, alertMessage: alertMessage)
     }
     
     func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
