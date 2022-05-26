@@ -36,50 +36,70 @@ class EditViewController: UIViewController {
         self.output.modifyStockSuccess
             .subscribe(onNext: { _ in
                 Fruit.allCases.forEach { fruit in
-                    self.updateStockLabel(of: fruit)
+                    self.updateCurrentValue(of: fruit)
                 }
+            }).disposed(by: disposeBag)
+        
+        self.output.alartMessage
+            .subscribe(onNext: { message in
+                guard let message = message else {
+                    return
+                }
+                self.showAlert(title: "알림", message: message)
             }).disposed(by: disposeBag)
     }
     
-    private func updateStockLabel(of fruit: Fruit) {
+    private func updateCurrentValue(of fruit: Fruit) {
         var label: UILabel?
+        var stepper: UIStepper?
         switch fruit {
         case .strawberry:
             label = self.strawberryStockLabel
+            stepper = self.strawberryStepper
         case .banana:
             label = self.bananaStockLabel
+            stepper = self.bananaStepper
         case .pineapple:
             label = self.pineappleStockLabel
+            stepper = self.pineappleStepper
         case .kiwi:
             label = self.kiwiStockLabel
+            stepper = self.kiwiStepper
         case .mango:
             label = self.mangoStockLabel
+            stepper = self.mangoStepper
         }
+        
         editViewModel.fruitStockObservable(of: fruit)
-            .map{ String($0) }
             .subscribe(onNext: { stock in
-                label?.text = stock
-                print(stock)
+                label?.text = String(stock)
+                stepper?.value = Double(stock)
             }).disposed(by: disposeBag)
     }
 
     @IBAction func tapStrawberryStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.strawberry, Int(strawberryStepper.stepValue)))
+        self.input.stockChange.onNext((.strawberry, Int(strawberryStepper.value)))
     }
     
     @IBAction func tapBananaStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.banana, Int(bananaStepper.stepValue)))
+        self.input.stockChange.onNext((.banana, Int(bananaStepper.value)))
     }
     
     @IBAction func tapPineappleStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.pineapple, Int(pineappleStepper.stepValue)))
+        self.input.stockChange.onNext((.pineapple, Int(pineappleStepper.value)))
     }
     
     @IBAction func tapKiwiStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.kiwi, Int(kiwiStepper.stepValue)))
+        self.input.stockChange.onNext((.kiwi, Int(kiwiStepper.value)))
     }
     
     @IBAction func tapMangoStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.mango, Int(mangoStepper.stepValue)))
+        self.input.stockChange.onNext((.mango, Int(mangoStepper.value)))
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alertController, animated: true)
     }
 }

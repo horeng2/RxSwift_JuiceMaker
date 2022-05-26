@@ -18,25 +18,20 @@ class EditViewModel {
     
     struct Output {
         let modifyStockSuccess: BehaviorSubject<Bool>
+        let alartMessage: PublishSubject<String?>
     }
     
     func transform(input: Input) -> Output {
         let modifyStockSuccess = BehaviorSubject<Bool>(value: true)
-        let newFruitStock = PublishSubject<(Fruit, Int)>()
+        let alartMessage = PublishSubject<String?>()
         
         input.stockChange
             .subscribe(onNext: { (fruit, quantity) in
-                self.juiceMaker.fruitStockObservable(of: fruit)
-                    .subscribe(onNext: { currentStock in
-                        newFruitStock.onNext((fruit, quantity + currentStock))
-                    }).disposed(by: self.disposeBag)
-            }).disposed(by: disposeBag)
-        
-        newFruitStock
-            .map{ (fruit, quantity) in
+                if let failureMessage = self.modifyFailureMessage(quantity) {
+                    alartMessage.onNext(failureMessage)
+                    return
+                }
                 self.juiceMaker.modifyFruitStock(for: fruit, newQuantity: quantity)
-            }.subscribe(onNext: { modifyResult in
-                modifyResult
                     .subscribe(onNext: { result in
                         if result == true {
                             modifyStockSuccess.onNext(true)
@@ -45,13 +40,23 @@ class EditViewModel {
                         }
                     }).disposed(by: self.disposeBag)
             }).disposed(by: disposeBag)
-        
-        
-        
-        return Output(modifyStockSuccess: modifyStockSuccess)
+
+        return Output(modifyStockSuccess: modifyStockSuccess, alartMessage: alartMessage)
     }
     
     func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
         return juiceMaker.fruitStockObservable(of: fruit)
+    }
+    
+    func modifyFailureMessage(_ quantity: Int) -> String? {
+        var modifyAlert: String? = nil
+        
+        if quantity > 100 {
+            modifyAlert = ModifyStockAlert.maximumStock.message
+        } else if quantity < 0 {
+            modifyAlert = ModifyStockAlert.minimumStock.message
+        }
+        
+        return modifyAlert
     }
 }
