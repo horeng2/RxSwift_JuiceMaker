@@ -68,27 +68,37 @@ class OrderViewController: UIViewController {
     @IBAction func orderOfStrawberryBananaJuice(_ sender: Any) {
         self.input.orderJuice.onNext(.strawberryBananaJuice)
     }
+    
     @IBAction func orderOfMangoKiwiJuice(_ sender: Any) {
         self.input.orderJuice.onNext(.mangoKiwiJuice)
     }
+    
     @IBAction func orderOStrawberryJuice(_ sender: Any) {
         self.input.orderJuice.onNext(.strawberryJuice)
     }
+    
     @IBAction func orderOfBananaJuice(_ sender: Any) {
         self.input.orderJuice.onNext(.bananaJuice)
     }
+    
     @IBAction func orderOfPineappleJuice(_ sender: Any) {
         self.input.orderJuice.onNext(.pineappleJuice)
     }
+    
     @IBAction func orderOfKiwiJuice(_ sender: Any) {
         self.input.orderJuice.onNext(.kiwiJuice)
     }
+    
     @IBAction func orderOfMangoJuice(_ sender: Any) {
         self.input.orderJuice.onNext(.mangoJuice)
     }
     
     private func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
         present(alertController, animated: true)
     }

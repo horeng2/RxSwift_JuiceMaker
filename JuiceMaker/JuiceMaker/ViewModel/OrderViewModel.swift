@@ -41,10 +41,7 @@ class OrderViewModel {
                     }).disposed(by: self.disposeBag)
             }).disposed(by: disposeBag)
         
-        return Output(
-            orderSuccess: orderSuccess,
-            resultMessage: resultMessage
-        )
+        return Output(orderSuccess: orderSuccess, resultMessage: resultMessage)
     }
     
     func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
