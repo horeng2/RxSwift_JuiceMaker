@@ -26,7 +26,7 @@ class FruitRepository {
                 .filterNil()
     }
     
-    func modifyStock(of fruit: Fruit, to newQuantity: Int) -> Observable<Bool> {
+    func updateStock(of fruit: Fruit, to newQuantity: Int) -> Observable<Bool> {
         guard fruitStock[fruit] != nil else {
             return Observable.just(false)
         }

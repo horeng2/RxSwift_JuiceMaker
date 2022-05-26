@@ -28,7 +28,7 @@ class EditViewModel {
         input.stockChange
             .subscribe(onNext: { (fruit, quantity) in
                 alertMessage.onNext(self.limitStockAlertMessage(quantity))
-                self.juiceMaker.modifyFruitStock(for: fruit, newQuantity: quantity)
+                self.juiceMaker.updateFruitStock(for: fruit, newQuantity: quantity)
                     .subscribe(onNext: { result in
                         if result == true {
                             modifyStockSuccess.onNext(true)
