@@ -40,7 +40,7 @@ class EditViewController: UIViewController {
                 }
             }).disposed(by: disposeBag)
         
-        self.output.alartMessage
+        self.output.alertMessage
             .subscribe(onNext: { message in
                 guard let message = message else {
                     return
