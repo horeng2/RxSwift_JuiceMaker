@@ -29,6 +29,7 @@ class EditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configure()
         self.binding()
     }
     
@@ -66,15 +67,26 @@ class EditViewController: UIViewController {
             }
         }()
         
-//        stepper?.minimumValue = .zero
-//        stepper?.maximumValue = Double(FruitRepository.maximumStock)
-        
         editViewModel.fruitStockObservable(of: fruit)
             .subscribe(onNext: { stock in
                 updateTarget.0.text = String(stock)
                 updateTarget.1.value = Double(stock)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func configure(){
+        self.strawberryStepper.minimumValue = .zero
+        self.bananaStepper.minimumValue = .zero
+        self.pineappleStepper.minimumValue = .zero
+        self.kiwiStepper.minimumValue = .zero
+        self.mangoStepper.minimumValue = .zero
+        
+        self.strawberryStepper.maximumValue = Double(FruitRepository.maximumStock)
+        self.bananaStepper.maximumValue = Double(FruitRepository.maximumStock)
+        self.pineappleStepper.maximumValue = Double(FruitRepository.maximumStock)
+        self.kiwiStepper.maximumValue = Double(FruitRepository.maximumStock)
+        self.mangoStepper.maximumValue = Double(FruitRepository.maximumStock)
     }
 
     @IBAction func tapStrawberryStepper(_ sender: Any) {
