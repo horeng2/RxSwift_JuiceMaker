@@ -13,7 +13,7 @@ struct JuiceMaker {
     private let diposeBag = DisposeBag()
     
     func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
-        return fruitRepository.readStock(of: fruit)
+        return self.fruitRepository.readStock(of: fruit)
     }
     
     func makeJuice(_ juice: Juice) -> Observable<Juice?> {
@@ -34,7 +34,7 @@ struct JuiceMaker {
         var canMake = [Bool]()
         
         juice.recipe.forEach { (fruit, count) in
-            fruitRepository.readStock(of: fruit)
+            self.fruitRepository.readStock(of: fruit)
                 .map{ $0 >= count }
                 .subscribe(onNext: { canMake.append($0) })
                 .disposed(by: diposeBag)
@@ -44,11 +44,11 @@ struct JuiceMaker {
     
     private func takeFruitStock(for juice: Juice) {
         juice.recipe.forEach { (fruit, count) in
-            fruitRepository.decreaseStock(of: fruit, count: count)
+            self.fruitRepository.decreaseStock(of: fruit, count: count)
         }
     }
     
     func updateFruitStock(for fruit: Fruit, newQuantity: Int) -> Observable<Bool> {
-        return fruitRepository.updateStock(of: fruit, to: newQuantity)
+        return self.fruitRepository.updateStock(of: fruit, to: newQuantity)
     }
 }

@@ -45,6 +45,6 @@ class OrderViewModel {
     }
     
     func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
-        return juiceMaker.fruitStockObservable(of: fruit)
+        return self.juiceMaker.fruitStockObservable(of: fruit)
     }
 }

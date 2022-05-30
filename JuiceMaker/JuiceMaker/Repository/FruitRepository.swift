@@ -17,7 +17,7 @@ class FruitRepository {
     
     init() {
         Fruit.allCases.forEach { fruit in
-            fruitStock.updateValue(self.initialStock, forKey: fruit)
+            self.fruitStock.updateValue(self.initialStock, forKey: fruit)
         }
     }
     

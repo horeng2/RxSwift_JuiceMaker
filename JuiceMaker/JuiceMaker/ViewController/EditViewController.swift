@@ -29,7 +29,7 @@ class EditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        binding()
+        self.binding()
     }
     
     private func binding() {
@@ -102,6 +102,6 @@ class EditViewController: UIViewController {
             preferredStyle: .alert
         )
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alertController, animated: true)
+        self.present(alertController, animated: true)
     }
 }
