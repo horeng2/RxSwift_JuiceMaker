@@ -50,32 +50,28 @@ class EditViewController: UIViewController {
     }
     
     private func updateCurrentValue(of fruit: Fruit) {
-        var label: UILabel?
-        var stepper: UIStepper?
-        switch fruit {
-        case .strawberry:
-            label = self.strawberryStockLabel
-            stepper = self.strawberryStepper
-        case .banana:
-            label = self.bananaStockLabel
-            stepper = self.bananaStepper
-        case .pineapple:
-            label = self.pineappleStockLabel
-            stepper = self.pineappleStepper
-        case .kiwi:
-            label = self.kiwiStockLabel
-            stepper = self.kiwiStepper
-        case .mango:
-            label = self.mangoStockLabel
-            stepper = self.mangoStepper
-        }
-        stepper?.minimumValue = .zero
-        stepper?.maximumValue = Double(FruitRepository.maximumStock)
+        let updateTarget: (UILabel, UIStepper) = {
+            switch fruit {
+            case .strawberry:
+                return (self.strawberryStockLabel, self.strawberryStepper)
+            case .banana:
+                return (self.bananaStockLabel, self.bananaStepper)
+            case .pineapple:
+                return (self.pineappleStockLabel, self.pineappleStepper)
+            case .kiwi:
+                return (self.kiwiStockLabel, self.kiwiStepper)
+            case .mango:
+                return (self.mangoStockLabel, self.mangoStepper)
+            }
+        }()
+        
+//        stepper?.minimumValue = .zero
+//        stepper?.maximumValue = Double(FruitRepository.maximumStock)
         
         editViewModel.fruitStockObservable(of: fruit)
             .subscribe(onNext: { stock in
-                label?.text = String(stock)
-                stepper?.value = Double(stock)
+                updateTarget.0.text = String(stock)
+                updateTarget.1.value = Double(stock)
             }).disposed(by: disposeBag)
     }
 

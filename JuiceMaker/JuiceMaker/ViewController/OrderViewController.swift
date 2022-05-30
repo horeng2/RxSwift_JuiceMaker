@@ -45,23 +45,25 @@ class OrderViewController: UIViewController {
     }
     
     private func updateStockLabel(of fruit: Fruit) {
-        var label: UILabel?
-        switch fruit {
-        case .strawberry:
-            label = self.strawberryStockLabel
-        case .banana:
-            label = self.bananaStockLabel
-        case .pineapple:
-            label = self.pineappleStockLabel
-        case .kiwi:
-            label = self.kiwiStockLabel
-        case .mango:
-            label = self.mangoStockLabel
-        }
+        let updateTarget: UILabel = {
+            switch fruit {
+            case .strawberry:
+                return self.strawberryStockLabel
+            case .banana:
+                return self.bananaStockLabel
+            case .pineapple:
+                return self.pineappleStockLabel
+            case .kiwi:
+                return self.kiwiStockLabel
+            case .mango:
+                return self.mangoStockLabel
+            }
+        }()
+        
         orderViewModel.fruitStockObservable(of: fruit)
             .map{ String($0) }
             .subscribe(onNext: { stock in
-                label?.text = stock
+                updateTarget.text = stock
             }).disposed(by: disposeBag)
     }
     
@@ -100,7 +102,7 @@ class OrderViewController: UIViewController {
             preferredStyle: .alert
         )
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alertController, animated: true)
+        self.present(alertController, animated: true)
     }
     
     
