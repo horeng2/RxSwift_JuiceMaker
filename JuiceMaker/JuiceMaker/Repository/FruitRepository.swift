@@ -7,7 +7,6 @@
 
 import Foundation
 import RxSwift
-import RxOptional
 
 class FruitRepository {
     static let shared = FruitRepository()
@@ -23,7 +22,7 @@ class FruitRepository {
     
     func readStock(of fruit: Fruit) -> Observable<Int> {
         return Observable.just(self.fruitStock[fruit])
-                .filterNil()
+        .compactMap{ $0 }
     }
     
     func updateStock(of fruit: Fruit, to newQuantity: Int) -> Observable<Bool> {
