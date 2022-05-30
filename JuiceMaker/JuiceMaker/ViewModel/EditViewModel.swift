@@ -35,8 +35,10 @@ class EditViewModel {
                         } else {
                             modifyStockSuccess.onNext(false)
                         }
-                    }).disposed(by: self.disposeBag)
-            }).disposed(by: disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
+            })
+            .disposed(by: disposeBag)
 
         return Output(modifyStockSuccess: modifyStockSuccess, alertMessage: alertMessage)
     }

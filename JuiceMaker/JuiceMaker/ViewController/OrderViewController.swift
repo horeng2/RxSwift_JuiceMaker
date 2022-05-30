@@ -41,7 +41,8 @@ class OrderViewController: UIViewController {
         self.output.resultMessage
             .subscribe(onNext: { message in
                 self.showAlert(title: "주문 결과", message: message)
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func updateStockLabel(of fruit: Fruit) {
@@ -64,7 +65,8 @@ class OrderViewController: UIViewController {
             .map{ String($0) }
             .subscribe(onNext: { stock in
                 updateTarget.text = stock
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     @IBAction func orderOfStrawberryBananaJuice(_ sender: Any) {

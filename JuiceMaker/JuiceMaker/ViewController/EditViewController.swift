@@ -46,7 +46,8 @@ class EditViewController: UIViewController {
                     return
                 }
                 self.showAlert(title: "알림", message: message)
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func updateCurrentValue(of fruit: Fruit) {
@@ -72,7 +73,8 @@ class EditViewController: UIViewController {
             .subscribe(onNext: { stock in
                 updateTarget.0.text = String(stock)
                 updateTarget.1.value = Double(stock)
-            }).disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
     }
 
     @IBAction func tapStrawberryStepper(_ sender: Any) {

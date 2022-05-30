@@ -38,8 +38,10 @@ class OrderViewModel {
                             orderSuccess.onNext(true)
                             resultMessage.onNext(OrderResult.orderSuccess.message)
                         }
-                    }).disposed(by: self.disposeBag)
-            }).disposed(by: disposeBag)
+                    })
+                    .disposed(by: self.disposeBag)
+            })
+            .disposed(by: disposeBag)
         
         return Output(orderSuccess: orderSuccess, resultMessage: resultMessage)
     }
