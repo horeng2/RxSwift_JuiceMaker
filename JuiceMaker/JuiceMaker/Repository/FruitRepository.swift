@@ -10,7 +10,7 @@ import RxSwift
 
 class FruitRepository {
     static let shared = FruitRepository()
-    private(set) var fruitStock = [Fruit : Int]()
+    private var fruitStock = [Fruit : Int]()
     private let initialStock = 10
     static let maximumStock = 100
     

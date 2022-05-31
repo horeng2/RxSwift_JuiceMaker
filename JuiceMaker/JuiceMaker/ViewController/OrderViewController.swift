@@ -32,6 +32,11 @@ class OrderViewController: UIViewController {
     }
     
     private func binding() {
+        var input = OrderViewModel.Input(orderJuice: PublishSubject<Juice>())
+        var output = orderViewModel.transform(input: input)
+
+        
+        
         self.output.orderSuccess
             .subscribe(onNext: { _ in
                 Fruit.allCases.forEach { fruit in
