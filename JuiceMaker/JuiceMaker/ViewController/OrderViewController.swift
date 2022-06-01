@@ -16,9 +16,15 @@ class OrderViewController: UIViewController {
     @IBOutlet weak var kiwiStockLabel: UILabel!
     @IBOutlet weak var mangoStockLabel: UILabel!
     
+    @IBOutlet weak var strawBananaJuiceButton: UIButton!
+    @IBOutlet weak var strawKiwiJuiceButton: UIButton!
+    @IBOutlet weak var strawberryJuiceButton: UIButton!
+    @IBOutlet weak var bananaJuiceButton: UIButton!
+    @IBOutlet weak var pineappleJuiceButton: UIButton!
+    @IBOutlet weak var kiwiJuiceButton: UIButton!
+    @IBOutlet weak var mangoJuiceButton: UIButton!
+    
     private let orderViewModel = OrderViewModel()
-    private lazy var input = OrderViewModel.Input(orderJuice: PublishSubject<Juice>())
-    private lazy var output = orderViewModel.transform(input: input)
 
     private var disposeBag = DisposeBag()
     
@@ -32,18 +38,43 @@ class OrderViewController: UIViewController {
     }
     
     private func binding() {
-        var input = OrderViewModel.Input(orderJuice: PublishSubject<Juice>())
-        var output = orderViewModel.transform(input: input)
+        let input = OrderViewModel.Input(
+            strawBananaJuiceButtonDidTap: self.strawBananaJuiceButton.rx.tap.asObservable(),
+            mangoKiwiJuiceButtonDidTap: self.strawKiwiJuiceButton.rx.tap.asObservable(),
+            strawberryJuiceButtonDidTap: self.strawberryJuiceButton.rx.tap.asObservable(),
+            bananaJuiceButtonDidTap: self.bananaJuiceButton.rx.tap.asObservable(),
+            pineappleJuiceButtonDidTap: self.pineappleJuiceButton.rx.tap.asObservable(),
+            kiwiJuiceButtonDidTap: self.kiwiJuiceButton.rx.tap.asObservable(),
+            mangoJuiceButtonDidTap: self.mangoJuiceButton.rx.tap.asObservable()
+        )
+        let output = orderViewModel.transform(input: input)
 
+        output.strawberryStock
+            .map{ String($0) }
+            .drive(self.strawberryStockLabel.rx.text)
+            .disposed(by: disposeBag)
         
+        output.bananaStock
+            .map{ String($0) }
+            .drive(self.bananaStockLabel.rx.text)
+            .disposed(by: disposeBag)
         
-        self.output.orderSuccess
-            .subscribe(onNext: { _ in
-                Fruit.allCases.forEach { fruit in
-                    self.updateStockLabel(of: fruit)
-                }
-            }).disposed(by: disposeBag)
-        self.output.resultMessage
+        output.pineappleStock
+            .map{ String($0) }
+            .drive(self.pineappleStockLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.kiwiStock
+            .map{ String($0) }
+            .drive(self.kiwiStockLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.mangoStock
+            .map{ String($0) }
+            .drive(self.mangoStockLabel.rx.text)
+            .disposed(by: disposeBag)
+
+        output.resultMessage
             .subscribe(onNext: { message in
                 self.showAlert(title: "주문 결과", message: message)
             })
@@ -72,34 +103,6 @@ class OrderViewController: UIViewController {
                 updateTarget.text = stock
             })
             .disposed(by: disposeBag)
-    }
-    
-    @IBAction func orderOfStrawberryBananaJuice(_ sender: Any) {
-        self.input.orderJuice.onNext(.strawberryBananaJuice)
-    }
-    
-    @IBAction func orderOfMangoKiwiJuice(_ sender: Any) {
-        self.input.orderJuice.onNext(.mangoKiwiJuice)
-    }
-    
-    @IBAction func orderOStrawberryJuice(_ sender: Any) {
-        self.input.orderJuice.onNext(.strawberryJuice)
-    }
-    
-    @IBAction func orderOfBananaJuice(_ sender: Any) {
-        self.input.orderJuice.onNext(.bananaJuice)
-    }
-    
-    @IBAction func orderOfPineappleJuice(_ sender: Any) {
-        self.input.orderJuice.onNext(.pineappleJuice)
-    }
-    
-    @IBAction func orderOfKiwiJuice(_ sender: Any) {
-        self.input.orderJuice.onNext(.kiwiJuice)
-    }
-    
-    @IBAction func orderOfMangoJuice(_ sender: Any) {
-        self.input.orderJuice.onNext(.mangoJuice)
     }
     
     private func showAlert(title: String, message: String) {
