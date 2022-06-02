@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A0t-vg-nTy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A0t-vg-nTy">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -124,17 +124,11 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="314" height="75"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="딸바쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderOfStrawberryBananaJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Om8-7H-muk"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VrU-7M-BU3" userLabel="Order of MangKi">
                                                         <rect key="frame" x="329" y="0.0" width="314.5" height="75"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="망키쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderOfMangoKiwiJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aMF-HT-N3U"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1yH-eU-fBY" userLabel="Blank">
                                                         <rect key="frame" x="658.5" y="0.0" width="149.5" height="75"/>
@@ -151,41 +145,26 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="딸기쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderOStrawberryJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HDp-5L-jf1"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eC-7y-YRV" userLabel="Order of Banana">
                                                         <rect key="frame" x="164.5" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="바나나쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderOfBananaJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g2e-BD-Lr8"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cI6-sl-CpE" userLabel="Order of Pineapple">
                                                         <rect key="frame" x="329" y="0.0" width="150" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="파인애플쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderOfPineappleJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QwV-Nt-Gcb"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3G7-wo-vDY" userLabel="Order of Kiwi">
                                                         <rect key="frame" x="494" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="키위쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderOfKiwiJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="als-1S-cN5"/>
-                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="itr-8a-ALj" userLabel="Order of Mango">
                                                         <rect key="frame" x="658.5" y="0.0" width="149.5" height="74.5"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="filled" title="망고쥬스 주문"/>
-                                                        <connections>
-                                                            <action selector="orderOfMangoJuice:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5GM-su-qbw"/>
-                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -215,10 +194,17 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bananaJuiceButton" destination="9eC-7y-YRV" id="Car-3b-PRb"/>
                         <outlet property="bananaStockLabel" destination="TS1-O7-bKV" id="c5F-UP-VGN"/>
+                        <outlet property="kiwiJuiceButton" destination="3G7-wo-vDY" id="pcV-La-Gqd"/>
                         <outlet property="kiwiStockLabel" destination="jhi-Cq-miJ" id="6df-iV-NnO"/>
+                        <outlet property="mangoJuiceButton" destination="itr-8a-ALj" id="BSI-Jn-Jy3"/>
                         <outlet property="mangoStockLabel" destination="uIv-WA-Fji" id="mMr-T0-WVj"/>
+                        <outlet property="pineappleJuiceButton" destination="cI6-sl-CpE" id="XgZ-2U-bzO"/>
                         <outlet property="pineappleStockLabel" destination="NTt-je-Kf6" id="bk8-RE-VgB"/>
+                        <outlet property="strawBananaJuiceButton" destination="7Kd-7H-DtS" id="uSP-tA-gWL"/>
+                        <outlet property="strawKiwiJuiceButton" destination="VrU-7M-BU3" id="su5-S8-0TC"/>
+                        <outlet property="strawberryJuiceButton" destination="nVN-ew-48A" id="m1X-oG-Brr"/>
                         <outlet property="strawberryStockLabel" destination="sgS-05-Q1F" id="hqq-4e-d9X"/>
                     </connections>
                 </viewController>
@@ -395,7 +381,6 @@
         <!--Navigation Controller-->
         <scene sceneID="uJT-JE-z2k">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hNj-i7-B9Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="A0t-vg-nTy" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="MRp-MJ-mku">
@@ -407,13 +392,13 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="bbl-f7-Jb3"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hNj-i7-B9Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="19.419642857142858" y="82.608695652173921"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YOK-xt-UXc">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L3m-AJ-9wv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="p4f-6M-VpG" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="2Pr-Ka-YPo"/>
@@ -426,6 +411,7 @@
                         <segue destination="D03-EW-v3Q" kind="relationship" relationship="rootViewController" id="CES-1M-02v"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L3m-AJ-9wv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9" y="1019"/>
         </scene>

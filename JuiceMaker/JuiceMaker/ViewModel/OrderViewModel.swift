@@ -12,7 +12,7 @@ import RxCocoa
 class OrderViewModel {
     private let juiceMaker = JuiceMaker()
     private let disposeBag = DisposeBag()
-
+    
     struct Input {
         let viewWillAppear: Observable<Void>
         let strawBananaJuiceButtonDidTap: Observable<Void>
@@ -42,7 +42,7 @@ class OrderViewModel {
         let kiwiStock = PublishSubject<String>()
         let mangoStock = PublishSubject<String>()
         
-
+        
         let strawBananaJuiceTap = input.strawBananaJuiceButtonDidTap
             .flatMap{ self.juiceMaker.makeJuice(.strawberryBananaJuice) }
             .do(onNext: { juice in
@@ -121,7 +121,7 @@ class OrderViewModel {
                 .map{ _ in }
         
         
-   
+        
         let orderButtonBind = Observable.merge(input.viewWillAppear, strawBananaJuiceTap, mangoKiwiJuiceTap, strawberryJuiceTap, bananaJuiceTap, pineappleJuiceTap, kiwiJuiceTap, mangoJuiceTap)
             .do(onNext: {
                 self.juiceMaker.fruitStockObservable(of: .strawberry)
@@ -145,15 +145,15 @@ class OrderViewModel {
                         mangoStock.onNext(stock)
                     }.dispose()
             })
-    
-        return Output(strawberryStock: strawberryStock,
-                      bananaStock: bananaStock,
-                      pineappleStock: pineappleStock,
-                      kiwiStock: kiwiStock,
-                      mangoStock: mangoStock,
-                      orderButtonBind: orderButtonBind,
-                      resultMessage: resultMessage)
-    }
+                
+                return Output(strawberryStock: strawberryStock,
+                              bananaStock: bananaStock,
+                              pineappleStock: pineappleStock,
+                              kiwiStock: kiwiStock,
+                              mangoStock: mangoStock,
+                              orderButtonBind: orderButtonBind,
+                              resultMessage: resultMessage)
+                }
     
     func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
         return Observable.just(11)

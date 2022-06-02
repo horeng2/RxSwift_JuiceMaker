@@ -69,8 +69,8 @@ class EditViewController: UIViewController {
         
         editViewModel.fruitStockObservable(of: fruit)
             .subscribe(onNext: { stock in
-                updateTarget.0.text = String(stock)
-                updateTarget.1.value = Double(stock)
+                updateTarget.0.text = stock
+                updateTarget.1.value = Double(stock) ?? 0
             })
             .disposed(by: disposeBag)
     }

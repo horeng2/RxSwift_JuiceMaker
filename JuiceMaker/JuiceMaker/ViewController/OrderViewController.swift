@@ -30,15 +30,12 @@ class OrderViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         self.binding()
     }
     
     private func binding() {
         let input = OrderViewModel.Input(
+            viewWillAppear: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map{ _ in },
             strawBananaJuiceButtonDidTap: self.strawBananaJuiceButton.rx.tap.asObservable(),
             mangoKiwiJuiceButtonDidTap: self.strawKiwiJuiceButton.rx.tap.asObservable(),
             strawberryJuiceButtonDidTap: self.strawberryJuiceButton.rx.tap.asObservable(),
@@ -50,60 +47,59 @@ class OrderViewController: UIViewController {
         let output = orderViewModel.transform(input: input)
 
         output.strawberryStock
-            .map{ String($0) }
-            .drive(self.strawberryStockLabel.rx.text)
+            .bind(to: self.strawberryStockLabel.rx.text)
             .disposed(by: disposeBag)
         
         output.bananaStock
-            .map{ String($0) }
-            .drive(self.bananaStockLabel.rx.text)
+            .bind(to: self.bananaStockLabel.rx.text)
             .disposed(by: disposeBag)
         
         output.pineappleStock
-            .map{ String($0) }
-            .drive(self.pineappleStockLabel.rx.text)
+            .bind(to: self.pineappleStockLabel.rx.text)
             .disposed(by: disposeBag)
         
         output.kiwiStock
-            .map{ String($0) }
-            .drive(self.kiwiStockLabel.rx.text)
+            .bind(to: self.kiwiStockLabel.rx.text)
             .disposed(by: disposeBag)
         
         output.mangoStock
-            .map{ String($0) }
-            .drive(self.mangoStockLabel.rx.text)
+            .bind(to: self.mangoStockLabel.rx.text)
             .disposed(by: disposeBag)
 
+        output.orderButtonBind
+            .subscribe()
+            .disposed(by: disposeBag)
+        
         output.resultMessage
-            .subscribe(onNext: { message in
+            .bind(onNext: { message in
                 self.showAlert(title: "주문 결과", message: message)
             })
             .disposed(by: disposeBag)
     }
     
-    private func updateStockLabel(of fruit: Fruit) {
-        let updateTarget: UILabel = {
-            switch fruit {
-            case .strawberry:
-                return self.strawberryStockLabel
-            case .banana:
-                return self.bananaStockLabel
-            case .pineapple:
-                return self.pineappleStockLabel
-            case .kiwi:
-                return self.kiwiStockLabel
-            case .mango:
-                return self.mangoStockLabel
-            }
-        }()
-        
-        orderViewModel.fruitStockObservable(of: fruit)
-            .map{ String($0) }
-            .subscribe(onNext: { stock in
-                updateTarget.text = stock
-            })
-            .disposed(by: disposeBag)
-    }
+//    private func updateStockLabel(of fruit: Fruit) {
+//        let updateTarget: UILabel = {
+//            switch fruit {
+//            case .strawberry:
+//                return self.strawberryStockLabel
+//            case .banana:
+//                return self.bananaStockLabel
+//            case .pineapple:
+//                return self.pineappleStockLabel
+//            case .kiwi:
+//                return self.kiwiStockLabel
+//            case .mango:
+//                return self.mangoStockLabel
+//            }
+//        }()
+//
+//        orderViewModel.fruitStockObservable(of: fruit)
+//            .map{ String($0) }
+//            .subscribe(onNext: { stock in
+//                updateTarget.text = stock
+//            })
+//            .disposed(by: disposeBag)
+//    }
     
     private func showAlert(title: String, message: String) {
         let alertController = UIAlertController(
