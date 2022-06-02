@@ -10,7 +10,7 @@ import RxSwift
 
 class FruitRepository {
     static let shared = FruitRepository()
-    private var fruitStock: Observable<[Fruit : Int]>
+    private var fruitStock: BehaviorSubject<[Fruit : Int]>
     static let initialStock = 10
     static let maximumStock = 100
     
@@ -19,7 +19,7 @@ class FruitRepository {
         Fruit.allCases.forEach { fruit in
             initialFruitStocks.updateValue(FruitRepository.initialStock, forKey: fruit)
         }
-        self.fruitStock = Observable.just(initialFruitStocks)
+        self.fruitStock = BehaviorSubject(value: initialFruitStocks)
     }
     
     func readStock(of fruit: Fruit) -> Observable<Int> {
@@ -31,19 +31,18 @@ class FruitRepository {
     }
     
     func updateStock(of fruit: Fruit, to newQuantity: Int) -> Observable<Bool> {
-        let newStocks = self.fruitStock.map{ stocks -> [Fruit: Int] in
+        self.fruitStock.map{ stocks in
             var newStocks = stocks
             newStocks.updateValue(newQuantity, forKey: fruit)
-            return newStocks
+            self.fruitStock.onNext(newStocks)
         }
-        self.fruitStock = newStocks
         
         return Observable.just(true)
     }
     
     func decreaseStock(of fruit: Fruit, count: Int) {
-        self.readStock(of: fruit).map{ currentStock in
-            guard currentStock == .zero else {
+        self.fruitStock.map{ stocks in
+            guard let currentStock = stocks[fruit], currentStock > .zero else {
                 return
             }
             self.updateStock(of: fruit, to: currentStock - count)
