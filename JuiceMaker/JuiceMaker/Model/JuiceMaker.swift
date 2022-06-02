@@ -12,8 +12,8 @@ struct JuiceMaker {
     private let fruitRepository = FruitRepository.shared
     private let diposeBag = DisposeBag()
     
-    func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
-        return self.fruitRepository.readStock(of: fruit)
+    func fruitStockObservable(of fruit: Fruit) -> Observable<String> {
+        return self.fruitRepository.readStock(of: fruit).map{ String($0) }
     }
     
     func makeJuice(_ juice: Juice) -> Observable<Juice?> {
