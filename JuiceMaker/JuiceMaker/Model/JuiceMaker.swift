@@ -26,8 +26,8 @@ struct JuiceMaker {
                 }
                 self.takeFruitStock(for: juice)
             })
-        
-        return juiceObservable
+                
+                return juiceObservable
     }
     
     private func canMake(juice: Juice) -> Observable<[Bool]> {
@@ -39,6 +39,7 @@ struct JuiceMaker {
                 .subscribe(onNext: { canMake.append($0) })
                 .disposed(by: diposeBag)
         }
+        
         return Observable.just(canMake)
     }
     

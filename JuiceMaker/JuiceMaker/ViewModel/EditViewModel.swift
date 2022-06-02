@@ -39,7 +39,7 @@ class EditViewModel {
                     .disposed(by: self.disposeBag)
             })
             .disposed(by: disposeBag)
-
+        
         return Output(modifyStockSuccess: modifyStockSuccess, alertMessage: alertMessage)
     }
     

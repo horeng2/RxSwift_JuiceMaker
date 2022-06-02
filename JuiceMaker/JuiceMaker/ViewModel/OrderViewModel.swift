@@ -42,7 +42,6 @@ class OrderViewModel {
         let kiwiStock = PublishSubject<String>()
         let mangoStock = PublishSubject<String>()
         
-        
         let strawBananaJuiceTap = input.strawBananaJuiceButtonDidTap
             .flatMap{ self.juiceMaker.makeJuice(.strawberryBananaJuice) }
             .do(onNext: { juice in
@@ -52,7 +51,7 @@ class OrderViewModel {
                     resultMessage.onNext(OrderResult.orderSuccess.message)
                 }
             })
-                .map{ _ in }
+            .map{ _ in }
         
         let mangoKiwiJuiceTap = input.mangoKiwiJuiceButtonDidTap
             .flatMap{ self.juiceMaker.makeJuice(.mangoKiwiJuice) }
@@ -120,9 +119,14 @@ class OrderViewModel {
             })
                 .map{ _ in }
         
-        
-        
-        let orderButtonBind = Observable.merge(input.viewWillAppear, strawBananaJuiceTap, mangoKiwiJuiceTap, strawberryJuiceTap, bananaJuiceTap, pineappleJuiceTap, kiwiJuiceTap, mangoJuiceTap)
+        let orderButtonBind = Observable.merge(input.viewWillAppear,
+                                               strawBananaJuiceTap,
+                                               mangoKiwiJuiceTap,
+                                               strawberryJuiceTap,
+                                               bananaJuiceTap,
+                                               pineappleJuiceTap,
+                                               kiwiJuiceTap,
+                                               mangoJuiceTap)
             .do(onNext: {
                 self.juiceMaker.fruitStockObservable(of: .strawberry)
                     .bind{ stock in
