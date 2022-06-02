@@ -43,7 +43,7 @@ class EditViewModel {
         return Output(modifyStockSuccess: modifyStockSuccess, alertMessage: alertMessage)
     }
     
-    func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
+    func fruitStockObservable(of fruit: Fruit) -> Observable<String> {
         return self.juiceMaker.fruitStockObservable(of: fruit)
     }
     
