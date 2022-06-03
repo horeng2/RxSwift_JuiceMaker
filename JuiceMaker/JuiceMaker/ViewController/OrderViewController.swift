@@ -24,8 +24,6 @@ class OrderViewController: UIViewController {
     @IBOutlet weak var kiwiJuiceButton: UIButton!
     @IBOutlet weak var mangoJuiceButton: UIButton!
     
-    private let orderViewModel = OrderViewModel()
-
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -34,6 +32,7 @@ class OrderViewController: UIViewController {
     }
     
     private func binding() {
+        let orderViewModel = OrderViewModel()
         let input = OrderViewModel.Input(
             viewWillAppear: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map{ _ in },
             strawBananaJuiceButtonDidTap: self.strawBananaJuiceButton.rx.tap.asObservable(),
