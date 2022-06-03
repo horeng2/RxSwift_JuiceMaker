@@ -49,7 +49,7 @@ struct JuiceMaker {
         }
     }
     
-    func updateFruitStock(for fruit: Fruit, newQuantity: Int) -> Observable<Bool> {
+    func updateFruitStock(for fruit: Fruit, newQuantity: Int) {
         return self.fruitRepository.updateStock(of: fruit, to: newQuantity)
     }
 }
