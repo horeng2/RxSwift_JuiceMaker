@@ -25,6 +25,7 @@ class EditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configure()
         self.binding()
     }
     
@@ -58,19 +59,22 @@ class EditViewController: UIViewController {
             .bind(onNext: { stock in
                 self.pineappleStockLabel.text = String(stock)
                 self.pineappleStepper.value = Double(stock)
-            })            .disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
         
         output.kiwiStock
             .bind(onNext: { stock in
                 self.kiwiStockLabel.text = String(stock)
                 self.kiwiStepper.value = Double(stock)
-            })            .disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
         
         output.mangoStock
             .bind(onNext: { stock in
                 self.mangoStockLabel.text = String(stock)
                 self.mangoStepper.value = Double(stock)
-            })            .disposed(by: disposeBag)
+            })
+            .disposed(by: disposeBag)
         
         output.alertMessage
             .subscribe(onNext: { message in
@@ -82,7 +86,7 @@ class EditViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func configure(output: EditViewModel.Output) {
+    private func configure() {
         self.strawberryStepper.minimumValue = .zero
         self.bananaStepper.minimumValue = .zero
         self.pineappleStepper.minimumValue = .zero

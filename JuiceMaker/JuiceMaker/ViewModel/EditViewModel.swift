@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import UIKit
 
 class EditViewModel {
     private let juiceMaker = JuiceMaker()
@@ -72,7 +73,6 @@ class EditViewModel {
                 self.juiceMaker.updateFruitStock(for: .mango, newQuantity: newValue)
             }
             .flatMap{ self.juiceMaker.fruitStockObservable(of: .mango) }
-            
         
         return Output(strawberryStock: strawberryStock,
                       bananaStock: bananaStock,
