@@ -20,28 +20,59 @@ class EditViewController: UIViewController {
     @IBOutlet weak var pineappleStepper: UIStepper!
     @IBOutlet weak var kiwiStepper: UIStepper!
     @IBOutlet weak var mangoStepper: UIStepper!
-    
-    private let editViewModel = EditViewModel()
-    private lazy var input = EditViewModel.Input(stockChange: PublishSubject<(Fruit, Int)>())
-    private lazy var output = editViewModel.transform(input: input)
-
+        
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configure()
         self.binding()
     }
     
     private func binding() {
-        self.output.modifyStockSuccess
-            .subscribe(onNext: { _ in
-                Fruit.allCases.forEach { fruit in
-                    self.updateCurrentValue(of: fruit)
-                }
-            }).disposed(by: disposeBag)
+        let editViewModel = EditViewModel()
+        let input = EditViewModel.Input(
+            viewWillAppear: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map{ _ in },
+            strawberryStepperDidTap: self.strawberryStepper.rx.value.asObservable(),
+            bananaStepperDidTap: self.bananaStepper.rx.value.asObservable(),
+            pineappleStepperDidTap: self.pineappleStepper.rx.value.asObservable(),
+            kiwiStepperDidTap: self.kiwiStepper.rx.value.asObservable(),
+            mangoStepperDidTap: self.mangoStepper.rx.value.asObservable()
+        )
+        let output = editViewModel.transform(input: input)
         
-        self.output.alertMessage
+        output.strawberryStock
+            .bind(onNext: { stock in
+                self.strawberryStockLabel.text = String(stock)
+                self.strawberryStepper.value = Double(stock)
+            })
+            .disposed(by: disposeBag)
+
+        output.bananaStock
+            .bind(onNext: { stock in
+                self.bananaStockLabel.text = String(stock)
+                self.bananaStepper.value = Double(stock)
+            })
+            .disposed(by: disposeBag)
+        
+        output.pineappleStock
+            .bind(onNext: { stock in
+                self.pineappleStockLabel.text = String(stock)
+                self.pineappleStepper.value = Double(stock)
+            })            .disposed(by: disposeBag)
+        
+        output.kiwiStock
+            .bind(onNext: { stock in
+                self.kiwiStockLabel.text = String(stock)
+                self.kiwiStepper.value = Double(stock)
+            })            .disposed(by: disposeBag)
+        
+        output.mangoStock
+            .bind(onNext: { stock in
+                self.mangoStockLabel.text = String(stock)
+                self.mangoStepper.value = Double(stock)
+            })            .disposed(by: disposeBag)
+        
+        output.alertMessage
             .subscribe(onNext: { message in
                 guard let message = message else {
                     return
@@ -51,31 +82,7 @@ class EditViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func updateCurrentValue(of fruit: Fruit) {
-        let updateTarget: (UILabel, UIStepper) = {
-            switch fruit {
-            case .strawberry:
-                return (self.strawberryStockLabel, self.strawberryStepper)
-            case .banana:
-                return (self.bananaStockLabel, self.bananaStepper)
-            case .pineapple:
-                return (self.pineappleStockLabel, self.pineappleStepper)
-            case .kiwi:
-                return (self.kiwiStockLabel, self.kiwiStepper)
-            case .mango:
-                return (self.mangoStockLabel, self.mangoStepper)
-            }
-        }()
-        
-        editViewModel.fruitStockObservable(of: fruit)
-            .subscribe(onNext: { stock in
-                updateTarget.0.text = stock
-                updateTarget.1.value = Double(stock) ?? 0
-            })
-            .disposed(by: disposeBag)
-    }
-    
-    private func configure(){
+    private func configure(output: EditViewModel.Output) {
         self.strawberryStepper.minimumValue = .zero
         self.bananaStepper.minimumValue = .zero
         self.pineappleStepper.minimumValue = .zero
@@ -87,26 +94,6 @@ class EditViewController: UIViewController {
         self.pineappleStepper.maximumValue = Double(FruitRepository.maximumStock)
         self.kiwiStepper.maximumValue = Double(FruitRepository.maximumStock)
         self.mangoStepper.maximumValue = Double(FruitRepository.maximumStock)
-    }
-
-    @IBAction func tapStrawberryStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.strawberry, Int(strawberryStepper.value)))
-    }
-    
-    @IBAction func tapBananaStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.banana, Int(bananaStepper.value)))
-    }
-    
-    @IBAction func tapPineappleStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.pineapple, Int(pineappleStepper.value)))
-    }
-    
-    @IBAction func tapKiwiStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.kiwi, Int(kiwiStepper.value)))
-    }
-    
-    @IBAction func tapMangoStepper(_ sender: Any) {
-        self.input.stockChange.onNext((.mango, Int(mangoStepper.value)))
     }
     
     private func showAlert(title: String, message: String) {
