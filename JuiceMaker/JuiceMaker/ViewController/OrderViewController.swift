@@ -77,30 +77,6 @@ class OrderViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-//    private func updateStockLabel(of fruit: Fruit) {
-//        let updateTarget: UILabel = {
-//            switch fruit {
-//            case .strawberry:
-//                return self.strawberryStockLabel
-//            case .banana:
-//                return self.bananaStockLabel
-//            case .pineapple:
-//                return self.pineappleStockLabel
-//            case .kiwi:
-//                return self.kiwiStockLabel
-//            case .mango:
-//                return self.mangoStockLabel
-//            }
-//        }()
-//
-//        orderViewModel.fruitStockObservable(of: fruit)
-//            .map{ String($0) }
-//            .subscribe(onNext: { stock in
-//                updateTarget.text = stock
-//            })
-//            .disposed(by: disposeBag)
-//    }
-    
     private func showAlert(title: String, message: String) {
         let alertController = UIAlertController(
             title: title,

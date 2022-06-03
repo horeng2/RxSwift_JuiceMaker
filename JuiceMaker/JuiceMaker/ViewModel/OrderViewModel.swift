@@ -159,7 +159,7 @@ class OrderViewModel {
                               resultMessage: resultMessage)
                 }
     
-    func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
-        return Observable.just(11)
+    func fruitStockObservable(of fruit: Fruit) -> Observable<String> {
+        return self.juiceMaker.fruitStockObservable(of: fruit)
     }
 }
