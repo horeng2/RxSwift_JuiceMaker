@@ -30,15 +30,13 @@ class FruitRepository {
             }
     }
     
-    func updateStock(of fruit: Fruit, to newQuantity: Int) -> Observable<Bool> {
+    func updateStock(of fruit: Fruit, to newQuantity: Int) {
         let newStocks = self.fruitStock.map{ stocks -> [Fruit : Int] in
             var newStocks = stocks
             newStocks.updateValue(newQuantity, forKey: fruit)
             return newStocks
         }
         self.fruitStock = newStocks
-        
-        return Observable.just(true)
     }
     
     func decreaseStock(of fruit: Fruit, count: Int) {
