@@ -130,23 +130,23 @@ class OrderViewModel {
             .do(onNext: {
                 self.juiceMaker.fruitStockObservable(of: .strawberry)
                     .bind{ stock in
-                        strawberryStock.onNext(stock)
+                        strawberryStock.onNext(String(stock))
                     }.dispose()
                 self.juiceMaker.fruitStockObservable(of: .banana)
                     .bind{ stock in
-                        bananaStock.onNext(stock)
+                        bananaStock.onNext(String(stock))
                     }.dispose()
                 self.juiceMaker.fruitStockObservable(of: .pineapple)
                     .bind{ stock in
-                        pineappleStock.onNext(stock)
+                        pineappleStock.onNext(String(stock))
                     }.dispose()
                 self.juiceMaker.fruitStockObservable(of: .kiwi)
                     .bind{ stock in
-                        kiwiStock.onNext(stock)
+                        kiwiStock.onNext(String(stock))
                     }.dispose()
                 self.juiceMaker.fruitStockObservable(of: .mango)
                     .bind{ stock in
-                        mangoStock.onNext(stock)
+                        mangoStock.onNext(String(stock))
                     }.dispose()
             })
                 
@@ -159,7 +159,7 @@ class OrderViewModel {
                               resultMessage: resultMessage)
                 }
     
-    func fruitStockObservable(of fruit: Fruit) -> Observable<String> {
+    func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
         return self.juiceMaker.fruitStockObservable(of: fruit)
     }
 }
