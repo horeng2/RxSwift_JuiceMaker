@@ -16,21 +16,22 @@ struct JuiceMaker {
         return self.fruitRepository.readStock(of: fruit)
     }
     
-    func makeJuice(_ juice: Juice) -> Observable<Juice?> {
-        let juiceObservable = self.canMake(juice: juice)
-            .map{ $0.contains(false) ? false : true }
-            .map{ $0 == true ? juice : nil }
-            .do(onNext: { juice in
-                guard let juice = juice else {
+    func makeJuice(_ juice: Juice) -> Observable<Bool> {
+        let juiceObservable = self.haveFruitStock(to: juice)
+            .map{ haveEnoughFruits in
+                haveEnoughFruits.contains(false) ? false : true
+            }
+            .do(onNext: { canMakeJuice in
+                guard canMakeJuice == true else {
                     return
                 }
                 self.takeFruitStock(for: juice)
             })
-                
-                return juiceObservable
+        
+        return juiceObservable
     }
     
-    private func canMake(juice: Juice) -> Observable<[Bool]> {
+    private func haveFruitStock(to juice: Juice) -> Observable<[Bool]> {
         var canMake = [Bool]()
         
         juice.recipe.forEach { (fruit, count) in

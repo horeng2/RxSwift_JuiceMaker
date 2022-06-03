@@ -44,77 +44,77 @@ class OrderViewModel {
         
         let strawBananaJuiceTap = input.strawBananaJuiceButtonDidTap
             .flatMap{ self.juiceMaker.makeJuice(.strawberryBananaJuice) }
-            .do(onNext: { juice in
-                if juice == nil {
-                    resultMessage.onNext(OrderResult.orderFailure.message)
-                } else {
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
                     resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
                 }
             })
             .map{ _ in }
         
         let mangoKiwiJuiceTap = input.mangoKiwiJuiceButtonDidTap
             .flatMap{ self.juiceMaker.makeJuice(.mangoKiwiJuice) }
-            .do(onNext: { juice in
-                if juice == nil {
-                    resultMessage.onNext(OrderResult.orderFailure.message)
-                } else {
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
                     resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
                 }
             })
                 .map{ _ in }
         
         let strawberryJuiceTap = input.strawberryJuiceButtonDidTap
             .flatMap{ self.juiceMaker.makeJuice(.strawberryJuice) }
-            .do(onNext: { juice in
-                if juice == nil {
-                    resultMessage.onNext(OrderResult.orderFailure.message)
-                } else {
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
                     resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
                 }
             })
                 .map{ _ in }
         
         let bananaJuiceTap = input.bananaJuiceButtonDidTap
             .flatMap{ self.juiceMaker.makeJuice(.bananaJuice) }
-            .do(onNext: { juice in
-                if juice == nil {
-                    resultMessage.onNext(OrderResult.orderFailure.message)
-                } else {
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
                     resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
                 }
             })
                 .map{ _ in }
         
         let pineappleJuiceTap = input.pineappleJuiceButtonDidTap
             .flatMap{ self.juiceMaker.makeJuice(.pineappleJuice) }
-            .do(onNext: { juice in
-                if juice == nil {
-                    resultMessage.onNext(OrderResult.orderFailure.message)
-                } else {
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
                     resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
                 }
             })
                 .map{ _ in }
         
         let kiwiJuiceTap = input.kiwiJuiceButtonDidTap
             .flatMap{ self.juiceMaker.makeJuice(.kiwiJuice) }
-            .do(onNext: { juice in
-                if juice == nil {
-                    resultMessage.onNext(OrderResult.orderFailure.message)
-                } else {
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
                     resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
                 }
             })
                 .map{ _ in }
         
         let mangoJuiceTap = input.mangoJuiceButtonDidTap
             .flatMap{ self.juiceMaker.makeJuice(.mangoJuice) }
-            .do(onNext: { juice in
-                if juice == nil {
-                    resultMessage.onNext(OrderResult.orderFailure.message)
-                } else {
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
                     resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
                 }
             })
                 .map{ _ in }
