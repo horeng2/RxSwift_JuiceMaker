@@ -244,9 +244,6 @@
                                                     </label>
                                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="BKf-Fe-Bao">
                                                         <rect key="frame" x="0.0" y="253" width="149.5" height="96"/>
-                                                        <connections>
-                                                            <action selector="tapStrawberryStepper:" destination="D03-EW-v3Q" eventType="valueChanged" id="SOp-TR-oK8"/>
-                                                        </connections>
                                                     </stepper>
                                                 </subviews>
                                             </stackView>
@@ -268,9 +265,6 @@
                                                     </label>
                                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Fqj-ti-HpD">
                                                         <rect key="frame" x="0.0" y="253" width="149.5" height="96"/>
-                                                        <connections>
-                                                            <action selector="tapBananaStepper:" destination="D03-EW-v3Q" eventType="valueChanged" id="9WH-a3-7JF"/>
-                                                        </connections>
                                                     </stepper>
                                                 </subviews>
                                             </stackView>
@@ -292,9 +286,6 @@
                                                     </label>
                                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="6Bx-mI-kRh">
                                                         <rect key="frame" x="0.0" y="253" width="150" height="96"/>
-                                                        <connections>
-                                                            <action selector="tapPineappleStepper:" destination="D03-EW-v3Q" eventType="valueChanged" id="Zv2-Bt-es4"/>
-                                                        </connections>
                                                     </stepper>
                                                 </subviews>
                                             </stackView>
@@ -316,9 +307,6 @@
                                                     </label>
                                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Hbe-Iv-zjk">
                                                         <rect key="frame" x="0.0" y="253" width="149.5" height="96"/>
-                                                        <connections>
-                                                            <action selector="tapKiwiStepper:" destination="D03-EW-v3Q" eventType="valueChanged" id="yau-2f-330"/>
-                                                        </connections>
                                                     </stepper>
                                                 </subviews>
                                             </stackView>
@@ -340,9 +328,6 @@
                                                     </label>
                                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="SZ4-rc-ILa">
                                                         <rect key="frame" x="0.0" y="253" width="149.5" height="96"/>
-                                                        <connections>
-                                                            <action selector="tapMangoStepper:" destination="D03-EW-v3Q" eventType="valueChanged" id="tuD-Yv-ZGl"/>
-                                                        </connections>
                                                     </stepper>
                                                 </subviews>
                                             </stackView>
