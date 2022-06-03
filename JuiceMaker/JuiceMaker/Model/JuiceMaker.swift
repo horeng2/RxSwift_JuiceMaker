@@ -22,7 +22,7 @@ struct JuiceMaker {
                 haveEnoughFruits.contains(false) ? false : true
             }
             .do(onNext: { canMakeJuice in
-                guard canMakeJuice == true else {
+                guard canMakeJuice else {
                     return
                 }
                 self.takeFruitStock(for: juice)
