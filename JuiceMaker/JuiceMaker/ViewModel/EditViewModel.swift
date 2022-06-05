@@ -23,6 +23,7 @@ class EditViewModel {
     }
     
     struct Output {
+        let currentStock: [Fruit: Double]
         let strawberryStock: Observable<Int>
         let bananaStock: Observable<Int>
         let pineappleStock: Observable<Int>
@@ -33,6 +34,17 @@ class EditViewModel {
     
     func transform(input: Input) -> Output {
         let alertMessage = PublishSubject<String?>()
+        let currentStock: [Fruit: Double] = {
+            var stocks = [Fruit: Double]()
+            Fruit.allCases.forEach { fruit in
+                self.juiceMaker.fruitStockObservable(of: fruit)
+                    .subscribe{ stock in
+                        stocks.updateValue(Double(stock), forKey: fruit)
+                    }
+                    .disposed(by: self.disposeBag)
+            }
+            return stocks
+        }()
         
         let strawberryStock = input.strawberryStepperDidTap
             .map{ stepperValue in
@@ -74,7 +86,8 @@ class EditViewModel {
             }
             .flatMap{ self.juiceMaker.fruitStockObservable(of: .mango) }
         
-        return Output(strawberryStock: strawberryStock,
+        return Output(currentStock: currentStock,
+                      strawberryStock: strawberryStock,
                       bananaStock: bananaStock,
                       pineappleStock: pineappleStock,
                       kiwiStock: kiwiStock,

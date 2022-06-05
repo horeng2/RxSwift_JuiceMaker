@@ -41,6 +41,8 @@ class EditViewController: UIViewController {
         )
         let output = editViewModel.transform(input: input)
         
+        self.setCurrentStock(output.currentStock)
+
         output.strawberryStock
             .bind(onNext: { stock in
                 self.strawberryStockLabel.text = String(stock)
@@ -98,6 +100,14 @@ class EditViewController: UIViewController {
         self.pineappleStepper.maximumValue = Double(FruitRepository.maximumStock)
         self.kiwiStepper.maximumValue = Double(FruitRepository.maximumStock)
         self.mangoStepper.maximumValue = Double(FruitRepository.maximumStock)
+    }
+    
+    private func setCurrentStock(_ stocks: [Fruit: Double]) {
+        self.strawberryStepper.value = stocks[.strawberry] ?? .zero
+        self.bananaStepper.value = stocks[.banana] ?? .zero
+        self.pineappleStepper.value = stocks[.pineapple] ?? .zero
+        self.kiwiStepper.value = stocks[.kiwi] ?? .zero
+        self.mangoStepper.value = stocks[.mango] ?? .zero
     }
     
     private func showAlert(title: String, message: String) {
