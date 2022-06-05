@@ -41,7 +41,7 @@ class EditViewController: UIViewController {
         )
         let output = editViewModel.transform(input: input)
         
-        self.setCurrentStock(output.currentStock)
+        self.presetStepperValue(output.currentStock)
 
         output.strawberryStock
             .bind(onNext: { stock in
@@ -102,7 +102,7 @@ class EditViewController: UIViewController {
         self.mangoStepper.maximumValue = Double(FruitRepository.maximumStock)
     }
     
-    private func setCurrentStock(_ stocks: [Fruit: Double]) {
+    private func presetStepperValue(_ stocks: [Fruit: Double]) {
         self.strawberryStepper.value = stocks[.strawberry] ?? .zero
         self.bananaStepper.value = stocks[.banana] ?? .zero
         self.pineappleStepper.value = stocks[.pineapple] ?? .zero
