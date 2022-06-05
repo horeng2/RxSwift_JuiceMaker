@@ -158,8 +158,4 @@ class OrderViewModel {
                               orderButtonBind: orderButtonBind,
                               resultMessage: resultMessage)
                 }
-    
-    func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
-        return self.juiceMaker.fruitStockObservable(of: fruit)
-    }
 }

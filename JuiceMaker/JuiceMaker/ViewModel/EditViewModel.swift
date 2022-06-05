@@ -95,10 +95,6 @@ class EditViewModel {
                       alertMessage: alertMessage)
     }
     
-    func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
-        return self.juiceMaker.fruitStockObservable(of: fruit)
-    }
-    
     private func limitStockAlertMessage(_ quantity: Int) -> String? {
         var limitAlert: String? = nil
         
