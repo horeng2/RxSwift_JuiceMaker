@@ -38,7 +38,7 @@ struct JuiceMaker {
             self.fruitRepository.readStock(of: fruit)
                 .map{ $0 >= count }
                 .subscribe(onNext: { canMake.append($0) })
-                .disposed(by: diposeBag)
+                .disposed(by: self.diposeBag)
         }
         
         return Observable.just(canMake)

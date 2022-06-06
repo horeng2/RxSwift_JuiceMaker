@@ -48,35 +48,35 @@ class EditViewController: UIViewController {
                 self.strawberryStockLabel.text = String(stock)
                 self.strawberryStepper.value = Double(stock)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
 
         output.bananaStock
             .bind(onNext: { stock in
                 self.bananaStockLabel.text = String(stock)
                 self.bananaStepper.value = Double(stock)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         output.pineappleStock
             .bind(onNext: { stock in
                 self.pineappleStockLabel.text = String(stock)
                 self.pineappleStepper.value = Double(stock)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         output.kiwiStock
             .bind(onNext: { stock in
                 self.kiwiStockLabel.text = String(stock)
                 self.kiwiStepper.value = Double(stock)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         output.mangoStock
             .bind(onNext: { stock in
                 self.mangoStockLabel.text = String(stock)
                 self.mangoStepper.value = Double(stock)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         output.alertMessage
             .subscribe(onNext: { message in
@@ -85,7 +85,7 @@ class EditViewController: UIViewController {
                 }
                 self.showAlert(title: "알림", message: message)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
     }
     
     private func configure() {

@@ -47,33 +47,33 @@ class OrderViewController: UIViewController {
 
         output.strawberryStock
             .bind(to: self.strawberryStockLabel.rx.text)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         output.bananaStock
             .bind(to: self.bananaStockLabel.rx.text)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         output.pineappleStock
             .bind(to: self.pineappleStockLabel.rx.text)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         output.kiwiStock
             .bind(to: self.kiwiStockLabel.rx.text)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         output.mangoStock
             .bind(to: self.mangoStockLabel.rx.text)
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
 
         output.orderButtonBind
             .subscribe()
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
         
         output.resultMessage
             .bind(onNext: { message in
                 self.showAlert(title: "주문 결과", message: message)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: self.disposeBag)
     }
     
     private func showAlert(title: String, message: String) {
@@ -85,7 +85,6 @@ class OrderViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alertController, animated: true)
     }
-    
     
     @IBAction func moveToEditViewController(_ sender: Any) {
         guard let vc = self.storyboard?.instantiateViewController(identifier: "EditViewController") else {

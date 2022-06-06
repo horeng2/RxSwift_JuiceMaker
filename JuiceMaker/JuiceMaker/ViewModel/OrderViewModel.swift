@@ -11,7 +11,6 @@ import RxCocoa
 
 class OrderViewModel {
     private let juiceMaker = JuiceMaker()
-    private let disposeBag = DisposeBag()
     
     struct Input {
         let viewWillAppear: Observable<Void>
