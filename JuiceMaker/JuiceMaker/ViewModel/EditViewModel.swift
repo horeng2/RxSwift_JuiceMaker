@@ -34,7 +34,7 @@ class EditViewModel {
     }
     
     func transform(input: Input) -> Output {
-        let fetchStock = input.viewWillAppear
+        let fetchInitialStock = input.viewWillAppear
             .flatMap { self.juiceMaker.fetchFruitStock() }
             .share()
 
@@ -79,23 +79,23 @@ class EditViewModel {
             .share()
 
         let strawberryStock = Observable.merge(
-            fetchStock.compactMap { $0[.strawberry] },
+            fetchInitialStock.compactMap { $0[.strawberry] },
             modifiedstrawberryStock
         )
         let bananaStock = Observable.merge(
-            fetchStock.compactMap { $0[.banana] },
+            fetchInitialStock.compactMap { $0[.banana] },
             modifiedBananaStock
         )
         let pineappleStock = Observable.merge(
-            fetchStock.compactMap { $0[.pineapple] },
+            fetchInitialStock.compactMap { $0[.pineapple] },
             modifiedPineappleStock
         )
         let kiwiStock = Observable.merge(
-            fetchStock.compactMap { $0[.kiwi] },
+            fetchInitialStock.compactMap { $0[.kiwi] },
             modifiedKiwiStock
         )
         let mangoStock = Observable.merge(
-            fetchStock.compactMap { $0[.mango] },
+            fetchInitialStock.compactMap { $0[.mango] },
             modifiedMangoStock
         )
 
