@@ -12,15 +12,12 @@ struct JuiceMaker {
     private let fruitRepository = FruitRepository.shared
     private let diposeBag = DisposeBag()
     
-    func fruitStockObservable(of fruit: Fruit) -> Observable<Int> {
-        return self.fruitRepository.readStock(of: fruit)
+    func fetchFruitStock() -> Observable<[Fruit: Int]> {
+        return self.fruitRepository.readStock()
     }
     
-    func makeJuice(_ juice: Juice) -> Observable<Bool> {
+    func juiceMakingResult(_ juice: Juice) -> Observable<Bool> {
         let juiceObservable = self.haveFruitStock(to: juice)
-            .map{ haveEnoughFruits in
-                haveEnoughFruits.contains(false) ? false : true
-            }
             .do(onNext: { canMakeJuice in
                 guard canMakeJuice else {
                     return
@@ -31,17 +28,16 @@ struct JuiceMaker {
         return juiceObservable
     }
     
-    private func haveFruitStock(to juice: Juice) -> Observable<[Bool]> {
-        var canMake = [Bool]()
-        
-        juice.recipe.forEach { (fruit, count) in
-            self.fruitRepository.readStock(of: fruit)
-                .map{ $0 >= count }
-                .subscribe(onNext: { canMake.append($0) })
-                .disposed(by: self.diposeBag)
-        }
-        
-        return Observable.just(canMake)
+    private func haveFruitStock(to juice: Juice) -> Observable<Bool> {
+        // 이렇게 하면 구독 없이 stream을 이을 수 있다.
+        return self.fruitRepository.readStock()
+            .map { stocks in
+                let result = juice.recipe.map { fruit, count in
+                    stocks[fruit, default: 0] >= count
+                }
+                .contains(false) ? false : true
+                return result
+            }
     }
     
     private func takeFruitStock(for juice: Juice) {

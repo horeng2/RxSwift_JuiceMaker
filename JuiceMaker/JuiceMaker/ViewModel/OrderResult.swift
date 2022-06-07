@@ -16,6 +16,15 @@ enum OrderResult {
             return "주문 실패! 재고가 부족해요💦"
         }
     }
+
+    init(orderResult: Bool) {
+        switch orderResult {
+        case true:
+            self = .orderSuccess
+        case false:
+            self = .orderFailure
+        }
+    }
     
     case orderSuccess
     case orderFailure

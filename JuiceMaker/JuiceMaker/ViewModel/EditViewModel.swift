@@ -15,83 +15,109 @@ class EditViewModel {
     
     struct Input {
         let viewWillAppear: Observable<Void>
-        let strawberryStepperDidTap: Observable<Double>
-        let bananaStepperDidTap: Observable<Double>
-        let pineappleStepperDidTap: Observable<Double>
-        let kiwiStepperDidTap: Observable<Double>
-        let mangoStepperDidTap: Observable<Double>
+        let strawberryStepperValueChanged: Observable<Double>
+        let bananaStepperValueChanged: Observable<Double>
+        let pineappleStepperValueChanged: Observable<Double>
+        let kiwiStepperValueChanged: Observable<Double>
+        let mangoStepperValueChanged: Observable<Double>
     }
     
     struct Output {
-        let currentStock: [Fruit: Double]
         let strawberryStock: Observable<Int>
         let bananaStock: Observable<Int>
         let pineappleStock: Observable<Int>
         let kiwiStock: Observable<Int>
         let mangoStock: Observable<Int>
-        let alertMessage: PublishSubject<String?>
+        let minimumStepperValue: Observable<Double>
+        let maximumStepperValue: Observable<Double>
+        let alertMessage: Observable<String>
     }
     
     func transform(input: Input) -> Output {
-        let alertMessage = PublishSubject<String?>()
-        let currentStock: [Fruit: Double] = {
-            var stocks = [Fruit: Double]()
-            Fruit.allCases.forEach { fruit in
-                self.juiceMaker.fruitStockObservable(of: fruit)
-                    .subscribe{ stock in
-                        stocks.updateValue(Double(stock), forKey: fruit)
-                    }
-                    .disposed(by: self.disposeBag)
-            }
-            return stocks
-        }()
-        
-        let strawberryStock = input.strawberryStepperDidTap
-            .map{ stepperValue in
-                let newValue = Int(stepperValue)
-                alertMessage.onNext(self.limitStockAlertMessage(newValue))
-                self.juiceMaker.updateFruitStock(for: .strawberry, newQuantity: newValue)
-            }
-            .flatMap{ self.juiceMaker.fruitStockObservable(of: .strawberry) }
-         
-        let bananaStock = input.bananaStepperDidTap
-            .map{ stepperValue in
-                let newValue = Int(stepperValue)
-                alertMessage.onNext(self.limitStockAlertMessage(newValue))
-                self.juiceMaker.updateFruitStock(for: .banana, newQuantity: newValue)
-            }
-            .flatMap{ self.juiceMaker.fruitStockObservable(of: .banana) }
-        
-        let pineappleStock = input.pineappleStepperDidTap
-            .map{ stepperValue in
-                let newValue = Int(stepperValue)
-                alertMessage.onNext(self.limitStockAlertMessage(newValue))
-                self.juiceMaker.updateFruitStock(for: .pineapple, newQuantity: newValue)
-            }
-            .flatMap{ self.juiceMaker.fruitStockObservable(of: .pineapple) }
-        
-        let kiwiStock = input.kiwiStepperDidTap
-            .map{ stepperValue in
-                let newValue = Int(stepperValue)
-                alertMessage.onNext(self.limitStockAlertMessage(newValue))
-                self.juiceMaker.updateFruitStock(for: .kiwi, newQuantity: newValue)
-            }
-            .flatMap{ self.juiceMaker.fruitStockObservable(of: .kiwi) }
-        
-        let mangoStock = input.mangoStepperDidTap
-            .map{ stepperValue in
-                let newValue = Int(stepperValue)
-                alertMessage.onNext(self.limitStockAlertMessage(newValue))
-                self.juiceMaker.updateFruitStock(for: .mango, newQuantity: newValue)
-            }
-            .flatMap{ self.juiceMaker.fruitStockObservable(of: .mango) }
-        
-        return Output(currentStock: currentStock,
-                      strawberryStock: strawberryStock,
+        let fetchStock = input.viewWillAppear
+            .flatMap { self.juiceMaker.fetchFruitStock() }
+            .share()
+
+        let modifiedstrawberryStock = input.strawberryStepperValueChanged
+            .skip(1)
+            .map(Int.init)
+            .do(onNext: {
+                self.juiceMaker.updateFruitStock(for: .strawberry, newQuantity: $0)
+            })
+            .share()
+
+        let modifiedBananaStock = input.bananaStepperValueChanged
+            .skip(1)
+            .map(Int.init)
+            .do(onNext: {
+                self.juiceMaker.updateFruitStock(for: .banana, newQuantity: $0)
+            })
+            .share()
+
+        let modifiedPineappleStock = input.pineappleStepperValueChanged
+            .skip(1)
+            .map(Int.init)
+            .do(onNext: {
+                self.juiceMaker.updateFruitStock(for: .pineapple, newQuantity: $0)
+            })
+            .share()
+
+        let modifiedKiwiStock = input.kiwiStepperValueChanged
+            .skip(1)
+            .map(Int.init)
+            .do(onNext: {
+                self.juiceMaker.updateFruitStock(for: .kiwi, newQuantity: $0)
+            })
+            .share()
+
+        let modifiedMangoStock = input.mangoStepperValueChanged
+            .skip(1)
+            .map(Int.init)
+            .do(onNext: {
+                self.juiceMaker.updateFruitStock(for: .mango, newQuantity: $0)
+            })
+            .share()
+
+        let strawberryStock = Observable.merge(
+            fetchStock.compactMap { $0[.strawberry] },
+            modifiedstrawberryStock
+        )
+        let bananaStock = Observable.merge(
+            fetchStock.compactMap { $0[.banana] },
+            modifiedBananaStock
+        )
+        let pineappleStock = Observable.merge(
+            fetchStock.compactMap { $0[.pineapple] },
+            modifiedPineappleStock
+        )
+        let kiwiStock = Observable.merge(
+            fetchStock.compactMap { $0[.kiwi] },
+            modifiedKiwiStock
+        )
+        let mangoStock = Observable.merge(
+            fetchStock.compactMap { $0[.mango] },
+            modifiedMangoStock
+        )
+
+        let minimumStepperValue = Observable.of(Double.zero)
+        let maximumStepperValue = Observable.of(FruitRepository.maximumStock).map(Double.init)
+
+        let alertMessage = Observable.merge(
+            modifiedstrawberryStock,
+            modifiedBananaStock,
+            modifiedPineappleStock,
+            modifiedKiwiStock,
+            modifiedMangoStock
+        )
+            .compactMap(self.limitStockAlertMessage)
+
+        return Output(strawberryStock: strawberryStock,
                       bananaStock: bananaStock,
                       pineappleStock: pineappleStock,
                       kiwiStock: kiwiStock,
                       mangoStock: mangoStock,
+                      minimumStepperValue: minimumStepperValue,
+                      maximumStepperValue: maximumStepperValue,
                       alertMessage: alertMessage)
     }
     
