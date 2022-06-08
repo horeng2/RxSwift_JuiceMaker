@@ -22,32 +22,18 @@ class FruitRepository {
         self.fruitStock = initialFruitStocks
     }
     
-    func readStock(of fruit: Fruit) -> Observable<Int> {
-        return self.fruitStock
-            .flatMap{ stocks in
-                Observable.just(stocks[fruit])
-                    .compactMap{ $0 }
-            }
+    func readStock(of fruit: Fruit) -> Observable<[Fruit : Int]> {
+        return Observable.of(self.fruitStock)
     }
     
     func updateStock(of fruit: Fruit, to newQuantity: Int) {
-        let newStocks = self.fruitStock.map{ stocks -> [Fruit : Int] in
-            var newStocks = stocks
-            newStocks.updateValue(newQuantity, forKey: fruit)
-            return newStocks
-        }
-        self.fruitStock = newStocks
+        self.fruitStock.updateValue(newQuantity, forKey: fruit)
     }
     
     func decreaseStock(of fruit: Fruit, count: Int) {
-        let newStocks = self.fruitStock.map{ stocks -> [Fruit : Int] in
-            guard let currentStock = stocks[fruit], currentStock > .zero else {
-                return [Fruit: Int]()
-            }
-            var newStocks = stocks
-            newStocks.updateValue(currentStock - count, forKey: fruit)
-            return newStocks
+        guard let currentStock = self.fruitStock[fruit], currentStock > .zero else {
+            return
         }
-        self.fruitStock = newStocks
+        self.fruitStock.updateValue(currentStock - count, forKey: fruit)
     }
 }
