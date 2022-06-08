@@ -22,7 +22,7 @@ class FruitRepository {
         self.fruitStock = initialFruitStocks
     }
     
-    func readStock(of fruit: Fruit) -> Observable<[Fruit : Int]> {
+    func readStock() -> Observable<[Fruit : Int]> {
         return Observable.of(self.fruitStock)
     }
     
