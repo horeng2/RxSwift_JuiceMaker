@@ -29,6 +29,8 @@ class EditViewModel {
         let kiwiStock: Observable<Int>
         let mangoStock: Observable<Int>
         let limitStockAlertMessage: Observable<String>
+        let stepperMinimumValue: Observable<Double>
+        let stepperMaximumValue: Observable<Double>
     }
     
     func transform(input: Input) -> Output {
@@ -108,13 +110,18 @@ class EditViewModel {
             changedMangoStock
         )
             .compactMap(self.limitStockAlertMessage)
-                            
+            
+        let stepperMinimumValue = Observable.just(Double.zero)
+        let stepperMaximumValue = Observable.just(FruitRepository.maximumStock).map(Double.init)
+                
         return Output(strawberryStock: strawberryStock,
                       bananaStock: bananaStock,
                       pineappleStock: pineappleStock,
                       kiwiStock: kiwiStock,
                       mangoStock: mangoStock,
-                      limitStockAlertMessage: limitStockAlertMessage)
+                      limitStockAlertMessage: limitStockAlertMessage,
+                      stepperMinimumValue: stepperMinimumValue,
+                      stepperMaximumValue: stepperMaximumValue)
     }
     
     private func limitStockAlertMessage(_ quantity: Int) -> String? {

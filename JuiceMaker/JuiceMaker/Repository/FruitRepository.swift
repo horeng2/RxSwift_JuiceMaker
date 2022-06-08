@@ -23,7 +23,7 @@ class FruitRepository {
     }
     
     func readStock() -> Observable<[Fruit : Int]> {
-        return Observable.of(self.fruitStock)
+        return Observable.just(self.fruitStock)
     }
     
     func updateStock(of fruit: Fruit, to newQuantity: Int) {

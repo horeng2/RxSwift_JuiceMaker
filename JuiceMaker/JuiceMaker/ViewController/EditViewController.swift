@@ -25,7 +25,6 @@ class EditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configure()
         self.binding()
     }
     
@@ -41,8 +40,6 @@ class EditViewController: UIViewController {
         )
         let output = editViewModel.transform(input: input)
         
-        self.presetStepperValue(output.currentStock)
-
         output.strawberryStock
             .bind(onNext: { stock in
                 self.strawberryStockLabel.text = String(stock)
@@ -78,38 +75,29 @@ class EditViewController: UIViewController {
             })
             .disposed(by: self.disposeBag)
         
-        output.alertMessage
+        output.limitStockAlertMessage
             .subscribe(onNext: { message in
-                guard let message = message else {
-                    return
-                }
                 self.showAlert(title: "알림", message: message)
             })
             .disposed(by: self.disposeBag)
-    }
-    
-    private func configure() {
-        self.strawberryStepper.minimumValue = .zero
-        self.bananaStepper.minimumValue = .zero
-        self.pineappleStepper.minimumValue = .zero
-        self.kiwiStepper.minimumValue = .zero
-        self.mangoStepper.minimumValue = .zero
         
-        self.strawberryStepper.maximumValue = Double(FruitRepository.maximumStock)
-        self.bananaStepper.maximumValue = Double(FruitRepository.maximumStock)
-        self.pineappleStepper.maximumValue = Double(FruitRepository.maximumStock)
-        self.kiwiStepper.maximumValue = Double(FruitRepository.maximumStock)
-        self.mangoStepper.maximumValue = Double(FruitRepository.maximumStock)
+        output.stepperMinimumValue
+            .bind(to: self.strawberryStepper.rx.minimumValue,
+                  self.bananaStepper.rx.minimumValue,
+                  self.pineappleStepper.rx.minimumValue,
+                  self.kiwiStepper.rx.minimumValue,
+                  self.mangoStepper.rx.minimumValue)
+            .disposed(by: self.disposeBag)
+        
+        output.stepperMaximumValue
+            .bind(to: self.strawberryStepper.rx.maximumValue,
+                  self.bananaStepper.rx.maximumValue,
+                  self.pineappleStepper.rx.maximumValue,
+                  self.kiwiStepper.rx.maximumValue,
+                  self.mangoStepper.rx.maximumValue)
+            .disposed(by: self.disposeBag)
     }
-    
-    private func presetStepperValue(_ stocks: [Fruit: Double]) {
-        self.strawberryStepper.value = stocks[.strawberry] ?? .zero
-        self.bananaStepper.value = stocks[.banana] ?? .zero
-        self.pineappleStepper.value = stocks[.pineapple] ?? .zero
-        self.kiwiStepper.value = stocks[.kiwi] ?? .zero
-        self.mangoStepper.value = stocks[.mango] ?? .zero
-    }
-    
+
     private func showAlert(title: String, message: String) {
         let alertController = UIAlertController(
             title: title,
