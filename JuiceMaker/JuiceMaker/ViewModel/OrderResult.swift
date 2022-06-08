@@ -17,6 +17,15 @@ enum OrderResult {
         }
     }
     
+    init(_ makeJuiceResult: Bool) {
+        switch makeJuiceResult {
+        case true:
+            self = .orderSuccess
+        case false:
+            self = .orderFailure
+        }
+    }
+    
     case orderSuccess
     case orderFailure
 }
