@@ -28,12 +28,10 @@ class EditViewModel {
         let pineappleStock: Observable<Int>
         let kiwiStock: Observable<Int>
         let mangoStock: Observable<Int>
-        let alertMessage: PublishSubject<String?>
+        let limitStockAlertMessage: Observable<String>
     }
     
     func transform(input: Input) -> Output {
-        let alertMessage = PublishSubject<String?>()
-        
         let presetCurrentStock = input.viewWillAppear
             .flatMap{ self.juiceMaker.fetchFruitStock() }
             .share()
@@ -49,7 +47,7 @@ class EditViewModel {
         let changedBananaStock = input.bananaStepperDidTap
             .skip(1)
             .map(Int.init)
-                .do(onNext: { stepperValue in
+            .do(onNext: { stepperValue in
                 self.juiceMaker.updateFruitStock(for: .banana, newQuantity: stepperValue)
             })
             .share()
@@ -61,7 +59,7 @@ class EditViewModel {
                 self.juiceMaker.updateFruitStock(for: .pineapple, newQuantity: stepperValue)
             })
             .share()
-        
+                    
         let changedKiwiStock = input.kiwiStepperDidTap
             .skip(1)
             .map(Int.init)
@@ -69,7 +67,7 @@ class EditViewModel {
                 self.juiceMaker.updateFruitStock(for: .kiwi, newQuantity: stepperValue)
             })
             .share()
-        
+                        
         let changedMangoStock = input.mangoStepperDidTap
             .skip(1)
             .map(Int.init)
@@ -77,39 +75,46 @@ class EditViewModel {
                 self.juiceMaker.updateFruitStock(for: .mango, newQuantity: stepperValue)
             })
             .share()
-        
+                            
         let strawberryStock = Observable.merge(
             presetCurrentStock.compactMap{ $0[.strawberry] },
             changedStrawberryStock
         )
-        
+                    
         let bananaStock = Observable.merge(
             presetCurrentStock.compactMap{ $0[.banana] },
             changedBananaStock
         )
-        
         let pineappleStock = Observable.merge(
             presetCurrentStock.compactMap{ $0[.pineapple] },
             changedPineappleStock
         )
-        
+                    
         let kiwiStock = Observable.merge(
             presetCurrentStock.compactMap{ $0[.kiwi] },
             changedKiwiStock
         )
-        
+                    
         let mangoStock = Observable.merge(
             presetCurrentStock.compactMap{ $0[.mango] },
             changedMangoStock
         )
-        
-        
+                            
+        let limitStockAlertMessage = Observable.merge(
+            changedStrawberryStock,
+            changedBananaStock,
+            changedPineappleStock,
+            changedKiwiStock,
+            changedMangoStock
+        )
+            .compactMap(self.limitStockAlertMessage)
+                            
         return Output(strawberryStock: strawberryStock,
                       bananaStock: bananaStock,
                       pineappleStock: pineappleStock,
                       kiwiStock: kiwiStock,
                       mangoStock: mangoStock,
-                      alertMessage: alertMessage)
+                      limitStockAlertMessage: limitStockAlertMessage)
     }
     
     private func limitStockAlertMessage(_ quantity: Int) -> String? {
