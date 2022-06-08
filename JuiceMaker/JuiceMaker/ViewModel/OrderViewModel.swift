@@ -76,13 +76,13 @@ class OrderViewModel {
         
         let fetchStock = Observable.merge(
             input.viewWillAppear,
-            strawBananaJuiceMakingResult.map{ _ in },
-            mangoKiwiJuiceMakingResult.map{ _ in },
-            strawberryJuiceMakingResult.map{ _ in },
-            bananaJuiceMakingResult.map{ _ in },
-            pineappleJuiceMakingResult.map{ _ in },
-            kiwiJuiceMakingResult.map{ _ in },
-            mangoJuiceMakingResult.map{ _ in }
+            strawBananaJuiceMakingResult.mapToVoid(),
+            mangoKiwiJuiceMakingResult.mapToVoid(),
+            strawberryJuiceMakingResult.mapToVoid(),
+            bananaJuiceMakingResult.mapToVoid(),
+            pineappleJuiceMakingResult.mapToVoid(),
+            kiwiJuiceMakingResult.mapToVoid(),
+            mangoJuiceMakingResult.mapToVoid()
         )
             .flatMap{ self.juiceMaker.fetchFruitStock() }
             .share()

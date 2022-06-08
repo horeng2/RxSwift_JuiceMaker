@@ -22,6 +22,7 @@
 		48C1746D2832A8A500D5D937 /* FruitRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C1746C2832A8A500D5D937 /* FruitRepository.swift */; };
 		48C1746F2832AB4700D5D937 /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C1746E2832AB4700D5D937 /* Fruit.swift */; };
 		48C17471283389C900D5D937 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C17470283389C900D5D937 /* OrderViewModel.swift */; };
+		48CDB9E528504EF1009A493A /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDB9E428504EF1009A493A /* Observable+Extension.swift */; };
 		B862D0589F0F417D670FBB05 /* Pods_JuiceMaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 332291326EED0A76D764D228 /* Pods_JuiceMaker.framework */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		48C1746C2832A8A500D5D937 /* FruitRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FruitRepository.swift; sourceTree = "<group>"; };
 		48C1746E2832AB4700D5D937 /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
 		48C17470283389C900D5D937 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
+		48CDB9E428504EF1009A493A /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
 		AAE4C87B040831FD833E62F4 /* Pods-JuiceMaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JuiceMaker.release.xcconfig"; path = "Target Support Files/Pods-JuiceMaker/Pods-JuiceMaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +88,14 @@
 				48C1745A28329D8F00D5D937 /* SceneDelegate.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		48431A0728504F3100D2606D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				48CDB9E428504EF1009A493A /* Observable+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		48AA46372833B7EA00CDAD62 /* Model */ = {
@@ -141,6 +151,7 @@
 				48C1746628329D9100D5D937 /* Info.plist */,
 				48408EB1283F719300B7BF5A /* App */,
 				48408EB0283F717900B7BF5A /* Assets */,
+				48431A0728504F3100D2606D /* Extension */,
 				48AA463E2833C0B400CDAD62 /* ViewController */,
 				48AA463D2833C09300CDAD62 /* ViewModel */,
 				48AA46372833B7EA00CDAD62 /* Model */,
@@ -291,6 +302,7 @@
 				48C1746D2832A8A500D5D937 /* FruitRepository.swift in Sources */,
 				48C17471283389C900D5D937 /* OrderViewModel.swift in Sources */,
 				48408EAF283E29B600B7BF5A /* EditViewModel.swift in Sources */,
+				48CDB9E528504EF1009A493A /* Observable+Extension.swift in Sources */,
 				48C1745B28329D8F00D5D937 /* SceneDelegate.swift in Sources */,
 				48408EAB283BAD8200B7BF5A /* EditViewController.swift in Sources */,
 			);
