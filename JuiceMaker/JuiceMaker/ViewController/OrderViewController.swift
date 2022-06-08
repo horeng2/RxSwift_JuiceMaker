@@ -65,11 +65,7 @@ class OrderViewController: UIViewController {
             .bind(to: self.mangoStockLabel.rx.text)
             .disposed(by: self.disposeBag)
 
-        output.orderButtonBind
-            .subscribe()
-            .disposed(by: self.disposeBag)
-        
-        output.resultMessage
+        output.orderResultMessage
             .bind(onNext: { message in
                 self.showAlert(title: "주문 결과", message: message)
             })
