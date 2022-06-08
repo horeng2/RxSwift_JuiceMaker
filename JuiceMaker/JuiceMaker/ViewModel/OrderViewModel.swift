@@ -88,33 +88,23 @@ class OrderViewModel {
             .share()
         
         let strawberryStock = fetchStock
-            .compactMap{ stocks in
-                stocks[.strawberry]
-            }
+            .compactMap{ $0[.strawberry] }
             .map(String.init)
         
         let bananaStock = fetchStock
-            .compactMap{ stocks in
-                stocks[.banana]
-            }
+            .compactMap{ $0[.banana] }
             .map(String.init)
         
         let pineappleStock = fetchStock
-            .compactMap{ stocks in
-                stocks[.pineapple]
-            }
+            .compactMap{ $0[.pineapple] }
             .map(String.init)
         
         let kiwiStock = fetchStock
-            .compactMap{ stocks in
-                stocks[.kiwi]
-            }
+            .compactMap{ $0[.kiwi] }
             .map(String.init)
         
         let mangoStock = fetchStock
-            .compactMap{ stocks in
-                stocks[.mango]
-            }
+            .compactMap{ $0[.mango] }
             .map(String.init)
         
         return Output(strawberryStock: strawberryStock,
