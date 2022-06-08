@@ -32,11 +32,11 @@ class EditViewController: UIViewController {
         let editViewModel = EditViewModel()
         let input = EditViewModel.Input(
             viewWillAppear: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map{ _ in },
-            strawberryStepperDidTap: self.strawberryStepper.rx.value.asObservable(),
-            bananaStepperDidTap: self.bananaStepper.rx.value.asObservable(),
-            pineappleStepperDidTap: self.pineappleStepper.rx.value.asObservable(),
-            kiwiStepperDidTap: self.kiwiStepper.rx.value.asObservable(),
-            mangoStepperDidTap: self.mangoStepper.rx.value.asObservable()
+            strawberryStepperValueChanged: self.strawberryStepper.rx.value.asObservable(),
+            bananaStepperValueChanged: self.bananaStepper.rx.value.asObservable(),
+            pineappleStepperValueChanged: self.pineappleStepper.rx.value.asObservable(),
+            kiwiStepperValueChanged: self.kiwiStepper.rx.value.asObservable(),
+            mangoStepperValueChanged: self.mangoStepper.rx.value.asObservable()
         )
         let output = editViewModel.transform(input: input)
         

@@ -15,11 +15,11 @@ class EditViewModel {
     
     struct Input {
         let viewWillAppear: Observable<Void>
-        let strawberryStepperDidTap: Observable<Double>
-        let bananaStepperDidTap: Observable<Double>
-        let pineappleStepperDidTap: Observable<Double>
-        let kiwiStepperDidTap: Observable<Double>
-        let mangoStepperDidTap: Observable<Double>
+        let strawberryStepperValueChanged: Observable<Double>
+        let bananaStepperValueChanged: Observable<Double>
+        let pineappleStepperValueChanged: Observable<Double>
+        let kiwiStepperValueChanged: Observable<Double>
+        let mangoStepperValueChanged: Observable<Double>
     }
     
     struct Output {
@@ -38,7 +38,7 @@ class EditViewModel {
             .flatMap{ self.juiceMaker.fetchFruitStock() }
             .share()
         
-        let changedStrawberryStock = input.strawberryStepperDidTap
+        let changedStrawberryStock = input.strawberryStepperValueChanged
             .skip(1)
             .map(Int.init)
             .do(onNext: { stepperValue in
@@ -46,7 +46,7 @@ class EditViewModel {
             })
             .share()
         
-        let changedBananaStock = input.bananaStepperDidTap
+        let changedBananaStock = input.bananaStepperValueChanged
             .skip(1)
             .map(Int.init)
             .do(onNext: { stepperValue in
@@ -54,7 +54,7 @@ class EditViewModel {
             })
             .share()
         
-        let changedPineappleStock = input.pineappleStepperDidTap
+        let changedPineappleStock = input.pineappleStepperValueChanged
             .skip(1)
             .map(Int.init)
             .do(onNext: { stepperValue in
@@ -62,7 +62,7 @@ class EditViewModel {
             })
             .share()
                     
-        let changedKiwiStock = input.kiwiStepperDidTap
+        let changedKiwiStock = input.kiwiStepperValueChanged
             .skip(1)
             .map(Int.init)
             .do(onNext: { stepperValue in
@@ -70,7 +70,7 @@ class EditViewModel {
             })
             .share()
                         
-        let changedMangoStock = input.mangoStepperDidTap
+        let changedMangoStock = input.mangoStepperValueChanged
             .skip(1)
             .map(Int.init)
             .do(onNext: { stepperValue in
