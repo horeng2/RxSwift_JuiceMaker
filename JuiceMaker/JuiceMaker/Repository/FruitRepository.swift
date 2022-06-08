@@ -10,7 +10,7 @@ import RxSwift
 
 class FruitRepository {
     static let shared = FruitRepository()
-    private var fruitStock: Observable<[Fruit : Int]>
+    private var fruitStock: [Fruit : Int]
     static let initialStock = 10
     static let maximumStock = 100
     
@@ -19,7 +19,7 @@ class FruitRepository {
         Fruit.allCases.forEach { fruit in
             initialFruitStocks.updateValue(FruitRepository.initialStock, forKey: fruit)
         }
-        self.fruitStock = Observable.just(initialFruitStocks)
+        self.fruitStock = initialFruitStocks
     }
     
     func readStock(of fruit: Fruit) -> Observable<Int> {
