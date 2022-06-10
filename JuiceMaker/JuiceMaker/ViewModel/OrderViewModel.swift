@@ -7,56 +7,154 @@
 
 import Foundation
 import RxSwift
-import RxRelay
 import RxCocoa
 
-class OrderViewModel: ViewModelType {
-    let fruitStock = BehaviorRelay<[Fruit: Int]>(value: FruitStore.shared.fruitStock)
+class OrderViewModel {
+    private let juiceMaker = JuiceMaker()
     
-    let disposeBag = DisposeBag()
-
     struct Input {
         let viewWillAppear: Observable<Void>
-//        let orderStrawberryBananaButtonTap: Observable<Void>
-//        let orderOfMangoKiwiButtonTap: Observable<Void>
-//        let orderOfStrawberryButtonTap: Observable<Void>
-//        let orderOfBananaButtonTap: Observable<Void>
-//        let orderOfPineappleButtonTap: Observable<Void>
-//        let orderOfKiwiButtonTap: Observable<Void>
-//        let orderOfMangoButtonTap: Observable<Void>
+        let strawBananaJuiceButtonDidTap: Observable<Void>
+        let mangoKiwiJuiceButtonDidTap: Observable<Void>
+        let strawberryJuiceButtonDidTap: Observable<Void>
+        let bananaJuiceButtonDidTap: Observable<Void>
+        let pineappleJuiceButtonDidTap: Observable<Void>
+        let kiwiJuiceButtonDidTap: Observable<Void>
+        let mangoJuiceButtonDidTap: Observable<Void>
     }
     
     struct Output {
-        var currentStock: Driver<[Fruit: Int]>
-//        var bananaStock: Driver<Int>
-//        var pineappleStock: Driver<Int>
-//        var kiwiStock: Driver<Int>
-//        var mangoStock: Driver<Int>
+        let strawberryStock: PublishSubject<String>
+        let bananaStock: PublishSubject<String>
+        let pineappleStock: PublishSubject<String>
+        let kiwiStock: PublishSubject<String>
+        let mangoStock: PublishSubject<String>
+        let orderButtonBind: Observable<Void>
+        let resultMessage: PublishSubject<String>
     }
     
     func transform(input: Input) -> Output {
-        let currentStock = fruitStock.asDriver()
+        let resultMessage = PublishSubject<String>()
+        let strawberryStock = PublishSubject<String>()
+        let bananaStock = PublishSubject<String>()
+        let pineappleStock = PublishSubject<String>()
+        let kiwiStock = PublishSubject<String>()
+        let mangoStock = PublishSubject<String>()
         
-//        let bananaStock = fruitStock
-//            .map{ $0.filter{ $0.key == .banana } }
-//            .asDriver(onErrorJustReturn: [.banana: 0])
-//        let pineappleStock = fruitStock
-//            .map{ $0.filter{ $0.key == .pineapple } }
-//            .asDriver(onErrorJustReturn: [.pineapple: 0])
-//        let kiwiStock = fruitStock
-//            .map{ $0.filter{ $0.key == .kiwi } }
-//            .asDriver(onErrorJustReturn: [.kiwi: 0])
-//        let mangoStock = fruitStock
-//            .map{ $0.filter{ $0.key == .mango } }
-//            .asDriver(onErrorJustReturn: [.mango: 0])
-            
-            return Output(currentStock: currentStock)
-    }
-}
-
-protocol ViewModelType: AnyObject {
-    associatedtype Input
-    associatedtype Output
-    
-    func transform(input: Input) -> Output
+        let strawBananaJuiceTap = input.strawBananaJuiceButtonDidTap
+            .flatMap{ self.juiceMaker.makeJuice(.strawberryBananaJuice) }
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
+                    resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
+                }
+            })
+            .map{ _ in }
+        
+        let mangoKiwiJuiceTap = input.mangoKiwiJuiceButtonDidTap
+            .flatMap{ self.juiceMaker.makeJuice(.mangoKiwiJuice) }
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
+                    resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
+                }
+            })
+                .map{ _ in }
+        
+        let strawberryJuiceTap = input.strawberryJuiceButtonDidTap
+            .flatMap{ self.juiceMaker.makeJuice(.strawberryJuice) }
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
+                    resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
+                }
+            })
+                .map{ _ in }
+        
+        let bananaJuiceTap = input.bananaJuiceButtonDidTap
+            .flatMap{ self.juiceMaker.makeJuice(.bananaJuice) }
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
+                    resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
+                }
+            })
+                .map{ _ in }
+        
+        let pineappleJuiceTap = input.pineappleJuiceButtonDidTap
+            .flatMap{ self.juiceMaker.makeJuice(.pineappleJuice) }
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
+                    resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
+                }
+            })
+                .map{ _ in }
+        
+        let kiwiJuiceTap = input.kiwiJuiceButtonDidTap
+            .flatMap{ self.juiceMaker.makeJuice(.kiwiJuice) }
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
+                    resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
+                }
+            })
+                .map{ _ in }
+        
+        let mangoJuiceTap = input.mangoJuiceButtonDidTap
+            .flatMap{ self.juiceMaker.makeJuice(.mangoJuice) }
+            .do(onNext: { canMakeJuice in
+                if canMakeJuice {
+                    resultMessage.onNext(OrderResult.orderSuccess.message)
+                } else {
+                    resultMessage.onNext(OrderResult.orderFailure.message)
+                }
+            })
+                .map{ _ in }
+        
+        let orderButtonBind = Observable.merge(input.viewWillAppear,
+                                               strawBananaJuiceTap,
+                                               mangoKiwiJuiceTap,
+                                               strawberryJuiceTap,
+                                               bananaJuiceTap,
+                                               pineappleJuiceTap,
+                                               kiwiJuiceTap,
+                                               mangoJuiceTap)
+            .do(onNext: {
+                self.juiceMaker.fruitStockObservable(of: .strawberry)
+                    .bind{ stock in
+                        strawberryStock.onNext(String(stock))
+                    }.dispose()
+                self.juiceMaker.fruitStockObservable(of: .banana)
+                    .bind{ stock in
+                        bananaStock.onNext(String(stock))
+                    }.dispose()
+                self.juiceMaker.fruitStockObservable(of: .pineapple)
+                    .bind{ stock in
+                        pineappleStock.onNext(String(stock))
+                    }.dispose()
+                self.juiceMaker.fruitStockObservable(of: .kiwi)
+                    .bind{ stock in
+                        kiwiStock.onNext(String(stock))
+                    }.dispose()
+                self.juiceMaker.fruitStockObservable(of: .mango)
+                    .bind{ stock in
+                        mangoStock.onNext(String(stock))
+                    }.dispose()
+            })
+                
+                return Output(strawberryStock: strawberryStock,
+                              bananaStock: bananaStock,
+                              pineappleStock: pineappleStock,
+                              kiwiStock: kiwiStock,
+                              mangoStock: mangoStock,
+                              orderButtonBind: orderButtonBind,
+                              resultMessage: resultMessage)
+                }
 }

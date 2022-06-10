@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A0t-vg-nTy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="A0t-vg-nTy">
     <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -187,26 +187,181 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="맛있는 쥬스를 만들어 드려요!" id="6JQ-IG-0Fr">
-                        <barButtonItem key="rightBarButtonItem" title="재고 수정" id="FEc-td-OAu"/>
+                        <barButtonItem key="rightBarButtonItem" title="재고 수정" id="FEc-td-OAu">
+                            <connections>
+                                <action selector="moveToEditViewController:" destination="BYZ-38-t0r" id="sKs-hq-pGr"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bananaJuiceButton" destination="9eC-7y-YRV" id="Car-3b-PRb"/>
                         <outlet property="bananaStockLabel" destination="TS1-O7-bKV" id="c5F-UP-VGN"/>
+                        <outlet property="kiwiJuiceButton" destination="3G7-wo-vDY" id="pcV-La-Gqd"/>
                         <outlet property="kiwiStockLabel" destination="jhi-Cq-miJ" id="6df-iV-NnO"/>
+                        <outlet property="mangoJuiceButton" destination="itr-8a-ALj" id="BSI-Jn-Jy3"/>
                         <outlet property="mangoStockLabel" destination="uIv-WA-Fji" id="mMr-T0-WVj"/>
-                        <outlet property="orderOfBananaJuice" destination="9eC-7y-YRV" id="0wn-gj-pA3"/>
-                        <outlet property="orderOfKiwiJuice" destination="3G7-wo-vDY" id="bk3-4o-Zsq"/>
-                        <outlet property="orderOfMangoJuice" destination="itr-8a-ALj" id="gex-fL-tZY"/>
-                        <outlet property="orderOfMangoKiwiJuice" destination="VrU-7M-BU3" id="JWC-U0-8rH"/>
-                        <outlet property="orderOfPineappleJuice" destination="cI6-sl-CpE" id="Q2X-G8-oYI"/>
-                        <outlet property="orderOfStrawberryBananaJuice" destination="7Kd-7H-DtS" id="e0u-Bp-br7"/>
-                        <outlet property="orderOfStrawberryJuice" destination="nVN-ew-48A" id="4UO-6g-DEi"/>
+                        <outlet property="pineappleJuiceButton" destination="cI6-sl-CpE" id="XgZ-2U-bzO"/>
                         <outlet property="pineappleStockLabel" destination="NTt-je-Kf6" id="bk8-RE-VgB"/>
+                        <outlet property="strawBananaJuiceButton" destination="7Kd-7H-DtS" id="uSP-tA-gWL"/>
+                        <outlet property="strawKiwiJuiceButton" destination="VrU-7M-BU3" id="su5-S8-0TC"/>
+                        <outlet property="strawberryJuiceButton" destination="nVN-ew-48A" id="m1X-oG-Brr"/>
                         <outlet property="strawberryStockLabel" destination="sgS-05-Q1F" id="hqq-4e-d9X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="762.72321428571422" y="82.608695652173921"/>
+        </scene>
+        <!--재고 추가-->
+        <scene sceneID="hH0-Qt-Thk">
+            <objects>
+                <viewController storyboardIdentifier="EditViewController" id="D03-EW-v3Q" customClass="EditViewController" customModule="JuiceMaker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="349-oS-Rsz">
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cCV-qY-H0q" userLabel="Edit Stock Stack View">
+                                <rect key="frame" x="44" y="44" width="808" height="349"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="qYm-Ws-kRm" userLabel="Stock Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="808" height="349"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7ec-5o-4kb" userLabel="Strawberry Stack View">
+                                                <rect key="frame" x="0.0" y="0.0" width="149.5" height="349"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogm-HH-5gZ" userLabel="Strawberry emoji Label">
+                                                        <rect key="frame" x="0.0" y="0.0" width="149.5" height="187.5"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="70"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0J-c5-l2x" userLabel="Strawberry stock Label">
+                                                        <rect key="frame" x="0.0" y="197.5" width="149.5" height="45.5"/>
+                                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="BKf-Fe-Bao">
+                                                        <rect key="frame" x="0.0" y="253" width="149.5" height="96"/>
+                                                    </stepper>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="X05-Fq-X0T" userLabel="Banana Stack View">
+                                                <rect key="frame" x="164.5" y="0.0" width="149.5" height="349"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍌" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2h-dH-W1O" userLabel="Banana emoji Label">
+                                                        <rect key="frame" x="0.0" y="0.0" width="149.5" height="187.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HmZ-H5-RIT" userLabel="Banana stock Label">
+                                                        <rect key="frame" x="0.0" y="197.5" width="149.5" height="45.5"/>
+                                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Fqj-ti-HpD">
+                                                        <rect key="frame" x="0.0" y="253" width="149.5" height="96"/>
+                                                    </stepper>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="w9i-oN-CBB" userLabel="Pineapple Stack View">
+                                                <rect key="frame" x="329" y="0.0" width="150" height="349"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🍍" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etJ-ap-nmV" userLabel="Pineapple emoji Label">
+                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="187.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLz-9k-AqY" userLabel="Pineapple stock Label">
+                                                        <rect key="frame" x="0.0" y="197.5" width="150" height="45.5"/>
+                                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="6Bx-mI-kRh">
+                                                        <rect key="frame" x="0.0" y="253" width="150" height="96"/>
+                                                    </stepper>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OCG-sF-xT5" userLabel="Kiwi Stack View">
+                                                <rect key="frame" x="494" y="0.0" width="149.5" height="349"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🥝" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E83-6L-5eF" userLabel="Kiwi emoji Label">
+                                                        <rect key="frame" x="0.0" y="0.0" width="149.5" height="187.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TpD-hU-KpE" userLabel="Kiwi stock Label">
+                                                        <rect key="frame" x="0.0" y="197.5" width="149.5" height="45.5"/>
+                                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="Hbe-Iv-zjk">
+                                                        <rect key="frame" x="0.0" y="253" width="149.5" height="96"/>
+                                                    </stepper>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XvU-36-tla" userLabel="Mango Stack View">
+                                                <rect key="frame" x="658.5" y="0.0" width="149.5" height="349"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🥭" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ft-0N-ini" userLabel="Mango emoji Label">
+                                                        <rect key="frame" x="0.0" y="0.0" width="149.5" height="187.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="70"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6PN-jJ-XLl" userLabel="Mango stock Label">
+                                                        <rect key="frame" x="0.0" y="197.5" width="149.5" height="45.5"/>
+                                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" minimumValue="-100" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="SZ4-rc-ILa">
+                                                        <rect key="frame" x="0.0" y="253" width="149.5" height="96"/>
+                                                    </stepper>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Zdz-7l-8a2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cCV-qY-H0q" firstAttribute="leading" secondItem="Zdz-7l-8a2" secondAttribute="leading" id="QBb-rI-O8R"/>
+                            <constraint firstItem="Zdz-7l-8a2" firstAttribute="bottom" secondItem="cCV-qY-H0q" secondAttribute="bottom" id="avY-wA-usF"/>
+                            <constraint firstItem="Zdz-7l-8a2" firstAttribute="trailing" secondItem="cCV-qY-H0q" secondAttribute="trailing" id="f1i-J0-5wA"/>
+                            <constraint firstItem="cCV-qY-H0q" firstAttribute="top" secondItem="Zdz-7l-8a2" secondAttribute="top" id="pbc-UF-t1w"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="재고 추가" id="XAk-ek-smb"/>
+                    <connections>
+                        <outlet property="bananaStepper" destination="Fqj-ti-HpD" id="YwX-lm-Dew"/>
+                        <outlet property="bananaStockLabel" destination="HmZ-H5-RIT" id="fu5-cr-dE3"/>
+                        <outlet property="kiwiStepper" destination="Hbe-Iv-zjk" id="uu1-nN-KO8"/>
+                        <outlet property="kiwiStockLabel" destination="TpD-hU-KpE" id="dqb-zh-Lt1"/>
+                        <outlet property="mangoStepper" destination="SZ4-rc-ILa" id="ggF-cL-4ot"/>
+                        <outlet property="mangoStockLabel" destination="6PN-jJ-XLl" id="yiY-PZ-ebc"/>
+                        <outlet property="pineappleStepper" destination="6Bx-mI-kRh" id="MWq-xG-cFp"/>
+                        <outlet property="pineappleStockLabel" destination="gLz-9k-AqY" id="adq-ZT-vdW"/>
+                        <outlet property="strawberryStepper" destination="BKf-Fe-Bao" id="cUJ-Zz-Kp1"/>
+                        <outlet property="strawberryStockLabel" destination="a0J-c5-l2x" id="06D-ik-I5G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jn7-N9-jGM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="752" y="1019"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="uJT-JE-z2k">
@@ -225,6 +380,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hNj-i7-B9Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="19.419642857142858" y="82.608695652173921"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="YOK-xt-UXc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="p4f-6M-VpG" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="2Pr-Ka-YPo"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FqJ-9N-Xgy">
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="D03-EW-v3Q" kind="relationship" relationship="rootViewController" id="CES-1M-02v"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L3m-AJ-9wv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9" y="1019"/>
         </scene>
     </scenes>
     <resources>

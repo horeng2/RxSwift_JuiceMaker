@@ -16,19 +16,15 @@ class OrderViewController: UIViewController {
     @IBOutlet weak var kiwiStockLabel: UILabel!
     @IBOutlet weak var mangoStockLabel: UILabel!
     
-    @IBOutlet weak var orderOfStrawberryBananaJuice: UIButton!
-    @IBOutlet weak var orderOfMangoKiwiJuice: UIButton!
-    @IBOutlet weak var orderOfStrawberryJuice: UIButton!
-    @IBOutlet weak var orderOfBananaJuice: UIButton!
-    @IBOutlet weak var orderOfPineappleJuice: UIButton!
-    @IBOutlet weak var orderOfKiwiJuice: UIButton!
-    @IBOutlet weak var orderOfMangoJuice: UIButton!
+    @IBOutlet weak var strawBananaJuiceButton: UIButton!
+    @IBOutlet weak var strawKiwiJuiceButton: UIButton!
+    @IBOutlet weak var strawberryJuiceButton: UIButton!
+    @IBOutlet weak var bananaJuiceButton: UIButton!
+    @IBOutlet weak var pineappleJuiceButton: UIButton!
+    @IBOutlet weak var kiwiJuiceButton: UIButton!
+    @IBOutlet weak var mangoJuiceButton: UIButton!
     
-    var disposeBag = DisposeBag()
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,31 +33,66 @@ class OrderViewController: UIViewController {
     
     private func binding() {
         let orderViewModel = OrderViewModel()
-
         let input = OrderViewModel.Input(
-            viewWillAppear: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map{ _ in }
-//            orderStrawberryBananaButtonTap: orderOfStrawberryBananaJuice.rx.tap.asObservable(),
-//            orderOfMangoKiwiButtonTap: orderOfMangoKiwiJuice.rx.tap.asObservable(),
-//            orderOfStrawberryButtonTap: orderOfStrawberryJuice.rx.tap.asObservable(),
-//            orderOfBananaButtonTap: orderOfBananaJuice.rx.tap.asObservable(),
-//            orderOfPineappleButtonTap: orderOfPineappleJuice.rx.tap.asObservable(),
-//            orderOfKiwiButtonTap: orderOfKiwiJuice.rx.tap.asObservable(),
-//            orderOfMangoButtonTap: orderOfMangoJuice.rx.tap.asObservable()
+            viewWillAppear: self.rx.methodInvoked(#selector(UIViewController.viewWillAppear(_:))).map{ _ in },
+            strawBananaJuiceButtonDidTap: self.strawBananaJuiceButton.rx.tap.asObservable(),
+            mangoKiwiJuiceButtonDidTap: self.strawKiwiJuiceButton.rx.tap.asObservable(),
+            strawberryJuiceButtonDidTap: self.strawberryJuiceButton.rx.tap.asObservable(),
+            bananaJuiceButtonDidTap: self.bananaJuiceButton.rx.tap.asObservable(),
+            pineappleJuiceButtonDidTap: self.pineappleJuiceButton.rx.tap.asObservable(),
+            kiwiJuiceButtonDidTap: self.kiwiJuiceButton.rx.tap.asObservable(),
+            mangoJuiceButtonDidTap: self.mangoJuiceButton.rx.tap.asObservable()
         )
-        
         let output = orderViewModel.transform(input: input)
+
+        output.strawberryStock
+            .bind(to: self.strawberryStockLabel.rx.text)
+            .disposed(by: self.disposeBag)
         
-        output.currentStock
-            .drive(onNext: { stock in
-                self.strawberryStockLabel.text = String(stock[.strawberry] ?? 10)
-                self.bananaStockLabel.text = String(stock[.banana] ?? 10)
-                self.pineappleStockLabel.text = String(stock[.pineapple] ?? 10)
-                self.kiwiStockLabel.text = String(stock[.kiwi] ?? 10)
-                self.mangoStockLabel.text = String(stock[.mango] ?? 10)
+        output.bananaStock
+            .bind(to: self.bananaStockLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output.pineappleStock
+            .bind(to: self.pineappleStockLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output.kiwiStock
+            .bind(to: self.kiwiStockLabel.rx.text)
+            .disposed(by: self.disposeBag)
+        
+        output.mangoStock
+            .bind(to: self.mangoStockLabel.rx.text)
+            .disposed(by: self.disposeBag)
+
+        output.orderButtonBind
+            .subscribe()
+            .disposed(by: self.disposeBag)
+        
+        output.resultMessage
+            .bind(onNext: { message in
+                self.showAlert(title: "주문 결과", message: message)
             })
             .disposed(by: self.disposeBag)
-            
-        
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        self.present(alertController, animated: true)
+    }
+    
+    @IBAction func moveToEditViewController(_ sender: Any) {
+        guard let vc = self.storyboard?.instantiateViewController(identifier: "EditViewController") else {
+            return
+        }
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
+
 
