@@ -23,12 +23,12 @@
 		48C1746F2832AB4700D5D937 /* Fruit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C1746E2832AB4700D5D937 /* Fruit.swift */; };
 		48C17471283389C900D5D937 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C17470283389C900D5D937 /* OrderViewModel.swift */; };
 		48CDB9E528504EF1009A493A /* Observable+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48CDB9E428504EF1009A493A /* Observable+Extension.swift */; };
-		B862D0589F0F417D670FBB05 /* Pods_JuiceMaker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 332291326EED0A76D764D228 /* Pods_JuiceMaker.framework */; };
+		48FF47E428C0861600E42272 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 48FF47E328C0861600E42272 /* RxCocoa */; };
+		48FF47E628C0861600E42272 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 48FF47E528C0861600E42272 /* RxRelay */; };
+		48FF47E828C0861600E42272 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 48FF47E728C0861600E42272 /* RxSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		332291326EED0A76D764D228 /* Pods_JuiceMaker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JuiceMaker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D538AE0A054EEFD73F5DB60 /* Pods-JuiceMaker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JuiceMaker.debug.xcconfig"; path = "Target Support Files/Pods-JuiceMaker/Pods-JuiceMaker.debug.xcconfig"; sourceTree = "<group>"; };
 		48408EA8283B691000B7BF5A /* JuiceMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuiceMaker.swift; sourceTree = "<group>"; };
 		48408EAA283BAD8200B7BF5A /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		48408EAC283E280C00B7BF5A /* OrderResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderResult.swift; sourceTree = "<group>"; };
@@ -47,7 +47,6 @@
 		48C1746E2832AB4700D5D937 /* Fruit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fruit.swift; sourceTree = "<group>"; };
 		48C17470283389C900D5D937 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		48CDB9E428504EF1009A493A /* Observable+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Extension.swift"; sourceTree = "<group>"; };
-		AAE4C87B040831FD833E62F4 /* Pods-JuiceMaker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JuiceMaker.release.xcconfig"; path = "Target Support Files/Pods-JuiceMaker/Pods-JuiceMaker.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +54,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B862D0589F0F417D670FBB05 /* Pods_JuiceMaker.framework in Frameworks */,
+				48FF47E828C0861600E42272 /* RxSwift in Frameworks */,
+				48FF47E628C0861600E42272 /* RxRelay in Frameworks */,
+				48FF47E428C0861600E42272 /* RxCocoa in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,8 +133,6 @@
 			children = (
 				48C1745728329D8F00D5D937 /* JuiceMaker */,
 				48C1745628329D8F00D5D937 /* Products */,
-				9D2CC81C390DCFBC8C7E46C4 /* Pods */,
-				9D16608E0A236F0AC334F9FF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,23 +159,6 @@
 			path = JuiceMaker;
 			sourceTree = "<group>";
 		};
-		9D16608E0A236F0AC334F9FF /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				332291326EED0A76D764D228 /* Pods_JuiceMaker.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9D2CC81C390DCFBC8C7E46C4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3D538AE0A054EEFD73F5DB60 /* Pods-JuiceMaker.debug.xcconfig */,
-				AAE4C87B040831FD833E62F4 /* Pods-JuiceMaker.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -184,17 +166,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48C1746928329D9100D5D937 /* Build configuration list for PBXNativeTarget "JuiceMaker" */;
 			buildPhases = (
-				F41FA6A78893D98B13B0C248 /* [CP] Check Pods Manifest.lock */,
 				48C1745128329D8F00D5D937 /* Sources */,
 				48C1745228329D8F00D5D937 /* Frameworks */,
 				48C1745328329D8F00D5D937 /* Resources */,
-				B3D91EC6CC5269CFD411ABFF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = JuiceMaker;
+			packageProductDependencies = (
+				48FF47E328C0861600E42272 /* RxCocoa */,
+				48FF47E528C0861600E42272 /* RxRelay */,
+				48FF47E728C0861600E42272 /* RxSwift */,
+			);
 			productName = JuiceMaker;
 			productReference = 48C1745528329D8F00D5D937 /* JuiceMaker.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +208,9 @@
 				Base,
 			);
 			mainGroup = 48C1744C28329D8F00D5D937;
+			packageReferences = (
+				48FF47E228C0861600E42272 /* XCRemoteSwiftPackageReference "RxSwift" */,
+			);
 			productRefGroup = 48C1745628329D8F00D5D937 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -244,48 +232,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		B3D91EC6CC5269CFD411ABFF /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JuiceMaker/Pods-JuiceMaker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JuiceMaker/Pods-JuiceMaker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JuiceMaker/Pods-JuiceMaker-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F41FA6A78893D98B13B0C248 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-JuiceMaker-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		48C1745128329D8F00D5D937 /* Sources */ = {
@@ -448,7 +394,6 @@
 		};
 		48C1746A28329D9100D5D937 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D538AE0A054EEFD73F5DB60 /* Pods-JuiceMaker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -477,7 +422,6 @@
 		};
 		48C1746B28329D9100D5D937 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AAE4C87B040831FD833E62F4 /* Pods-JuiceMaker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -526,6 +470,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		48FF47E228C0861600E42272 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		48FF47E328C0861600E42272 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48FF47E228C0861600E42272 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		48FF47E528C0861600E42272 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48FF47E228C0861600E42272 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		48FF47E728C0861600E42272 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 48FF47E228C0861600E42272 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 48C1744D28329D8F00D5D937 /* Project object */;
 }
